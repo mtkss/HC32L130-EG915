@@ -1,0 +1,5 @@
+build/
+tools/test_runtime/
+**/__pycache__/
+*.uvguix.*
+*.uvoptx

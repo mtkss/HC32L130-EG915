@@ -1,0 +1,2073 @@
+{
+  "date": "2026-11-16",
+  "scope": [
+    "core/domain.h",
+    "core/utc_calendar.c",
+    "core/utc_calendar.h",
+    "app/application.c",
+    "app/application.h",
+    "app/main.c",
+    "components/location_manager.c",
+    "components/location_manager.h",
+    "components/network_manager.c",
+    "components/network_manager.h",
+    "components/sampling_service.c",
+    "components/sampling_service.h",
+    "components/upload_schedule.c",
+    "components/upload_schedule.h",
+    "services/at_client.c",
+    "services/at_client.h",
+    "services/http_service.c",
+    "services/http_service.h",
+    "services/identity_store.c",
+    "services/identity_store.h",
+    "services/protocol_codec.c",
+    "services/protocol_codec.h",
+    "services/record_cache.c",
+    "services/record_cache.h",
+    "services/report_service.c",
+    "services/report_service.h",
+    "platform/board.c",
+    "platform/board.h",
+    "platform/board_pins.h",
+    "platform/interrupt_dispatch.c",
+    "platform/startup_hc32l130.s",
+    "config/project_config.h",
+    "tests/startup_test.s",
+    "tests/test_exit.s",
+    "tests/test_firmware.c"
+  ],
+  "functions": [
+    {
+      "file": "core/utc_calendar.c",
+      "name": "leap",
+      "line": 10,
+      "hasPurpose": true
+    },
+    {
+      "file": "core/utc_calendar.c",
+      "name": "month_days",
+      "line": 15,
+      "hasPurpose": true
+    },
+    {
+      "file": "core/utc_calendar.c",
+      "name": "utc_calendar_to_epoch",
+      "line": 21,
+      "hasPurpose": true
+    },
+    {
+      "file": "core/utc_calendar.c",
+      "name": "utc_calendar_from_epoch",
+      "line": 42,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "begin_sample",
+      "line": 47,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "begin_shutdown",
+      "line": 67,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "confirm_press",
+      "line": 83,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "receive_serial_number",
+      "line": 105,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "update_led",
+      "line": 157,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "accept_location",
+      "line": 173,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "begin_report",
+      "line": 189,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "application_init",
+      "line": 208,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "application_poll",
+      "line": 234,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/application.c",
+      "name": "application_snapshot",
+      "line": 509,
+      "hasPurpose": true
+    },
+    {
+      "file": "app/main.c",
+      "name": "main",
+      "line": 10,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/location_manager.c",
+      "name": "choose_source",
+      "line": 47,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/location_manager.c",
+      "name": "fallback",
+      "line": 68,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/location_manager.c",
+      "name": "location_start",
+      "line": 98,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/location_manager.c",
+      "name": "location_poll",
+      "line": 114,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/location_manager.c",
+      "name": "location_result",
+      "line": 286,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/location_manager.c",
+      "name": "location_position",
+      "line": 291,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/location_manager.c",
+      "name": "location_rsrp_dbm",
+      "line": 296,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/location_manager.c",
+      "name": "location_cancel",
+      "line": 302,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/network_manager.c",
+      "name": "due",
+      "line": 65,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/network_manager.c",
+      "name": "advance",
+      "line": 70,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/network_manager.c",
+      "name": "next_operator",
+      "line": 82,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/network_manager.c",
+      "name": "network_start",
+      "line": 110,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/network_manager.c",
+      "name": "network_poll",
+      "line": 133,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/network_manager.c",
+      "name": "network_result",
+      "line": 419,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/network_manager.c",
+      "name": "network_snapshot",
+      "line": 424,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/network_manager.c",
+      "name": "network_shutdown_start",
+      "line": 429,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/network_manager.c",
+      "name": "network_shutdown_poll",
+      "line": 447,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/sampling_service.c",
+      "name": "sampling_start",
+      "line": 21,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/sampling_service.c",
+      "name": "sampling_poll",
+      "line": 43,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/sampling_service.c",
+      "name": "sampling_result",
+      "line": 83,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/sampling_service.c",
+      "name": "sampling_copy",
+      "line": 88,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/sampling_service.c",
+      "name": "sampling_cancel",
+      "line": 97,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/upload_schedule.c",
+      "name": "upload_schedule_init",
+      "line": 9,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/upload_schedule.c",
+      "name": "upload_schedule_due",
+      "line": 19,
+      "hasPurpose": true
+    },
+    {
+      "file": "components/upload_schedule.c",
+      "name": "upload_schedule_complete",
+      "line": 49,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "finish",
+      "line": 25,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "at_init",
+      "line": 36,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "at_start",
+      "line": 43,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "at_poll",
+      "line": 78,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "at_result",
+      "line": 161,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "at_response",
+      "line": 166,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "at_cancel",
+      "line": 171,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "execute_step",
+      "line": 189,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "at_command_step",
+      "line": 220,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/at_client.c",
+      "name": "at_payload_step",
+      "line": 227,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/http_service.c",
+      "name": "http_start",
+      "line": 25,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/http_service.c",
+      "name": "http_poll",
+      "line": 49,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/http_service.c",
+      "name": "http_result",
+      "line": 121,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/http_service.c",
+      "name": "http_response",
+      "line": 126,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/http_service.c",
+      "name": "http_cancel",
+      "line": 132,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/identity_store.c",
+      "name": "identity_store_read",
+      "line": 10,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/identity_store.c",
+      "name": "identity_store_serial",
+      "line": 32,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/identity_store.c",
+      "name": "identity_store_checked",
+      "line": 57,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/identity_store.c",
+      "name": "identity_store_activated",
+      "line": 62,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/identity_store.c",
+      "name": "identity_store_mark_checked",
+      "line": 67,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/identity_store.c",
+      "name": "identity_store_mark_activated",
+      "line": 72,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "finite_value",
+      "line": 16,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "find_value",
+      "line": 27,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "read_number",
+      "line": 62,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_parse_config",
+      "line": 96,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_is_approved",
+      "line": 134,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "split_csv",
+      "line": 148,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "parse_scalar",
+      "line": 184,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_parse_gnss",
+      "line": 199,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_parse_position",
+      "line": 247,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_parse_cell",
+      "line": 270,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_parse_neighbors",
+      "line": 309,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_build_cell_url",
+      "line": 341,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_build_report",
+      "line": 365,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_parse_digits",
+      "line": 412,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/protocol_codec.c",
+      "name": "protocol_parse_ntp",
+      "line": 445,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/record_cache.c",
+      "name": "record_cache_init",
+      "line": 15,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/record_cache.c",
+      "name": "record_cache_push",
+      "line": 21,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/record_cache.c",
+      "name": "record_cache_peek",
+      "line": 49,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/record_cache.c",
+      "name": "record_cache_pop",
+      "line": 54,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/record_cache.c",
+      "name": "record_cache_count",
+      "line": 63,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/record_cache.c",
+      "name": "record_cache_dropped",
+      "line": 68,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/report_service.c",
+      "name": "report_start",
+      "line": 21,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/report_service.c",
+      "name": "report_poll",
+      "line": 43,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/report_service.c",
+      "name": "report_result",
+      "line": 66,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/report_service.c",
+      "name": "report_outcome",
+      "line": 71,
+      "hasPurpose": true
+    },
+    {
+      "file": "services/report_service.c",
+      "name": "report_cancel",
+      "line": 77,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "enter_critical",
+      "line": 40,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "leave_critical",
+      "line": 47,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "configure_pin",
+      "line": 60,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "start_timer",
+      "line": 73,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "start_uart",
+      "line": 92,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "start_rtc",
+      "line": 114,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_init",
+      "line": 136,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_now_ms",
+      "line": 162,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_modem_supply",
+      "line": 169,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_modem_key",
+      "line": 174,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_led_write",
+      "line": 179,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_take_wake_events",
+      "line": 184,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_take_short_press",
+      "line": 193,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_uart_write",
+      "line": 219,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_uart_read",
+      "line": 236,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_uart_flush",
+      "line": 255,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_uart_take_overflow",
+      "line": 263,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "from_bcd",
+      "line": 272,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "to_bcd",
+      "line": 277,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_rtc_epoch",
+      "line": 282,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_rtc_set",
+      "line": 294,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_sleep",
+      "line": 314,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_sample_adc",
+      "line": 373,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "sensor_transfer",
+      "line": 446,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_motion_start",
+      "line": 517,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_motion_sample",
+      "line": 559,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_motion_stop",
+      "line": 584,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_storage_read",
+      "line": 600,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "board_storage_write",
+      "line": 605,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "Tim0_IRQHandler",
+      "line": 634,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "Uart0_IRQHandler",
+      "line": 646,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "PortB_IRQHandler",
+      "line": 669,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/board.c",
+      "name": "Rtc_IRQHandler",
+      "line": 678,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/interrupt_dispatch.c",
+      "name": "EnableNvic",
+      "line": 16,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/interrupt_dispatch.c",
+      "name": "PORTB_IRQHandler",
+      "line": 30,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/interrupt_dispatch.c",
+      "name": "UART0_IRQHandler",
+      "line": 35,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/interrupt_dispatch.c",
+      "name": "TIM0_IRQHandler",
+      "line": 40,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/interrupt_dispatch.c",
+      "name": "RTC_IRQHandler",
+      "line": 45,
+      "hasPurpose": true
+    },
+    {
+      "file": "platform/interrupt_dispatch.c",
+      "name": "HardFault_Handler",
+      "line": 50,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "mock_reset",
+      "line": 69,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "inject",
+      "line": 85,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "answer",
+      "line": 98,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_init",
+      "line": 213,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_now_ms",
+      "line": 217,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_modem_supply",
+      "line": 222,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_modem_key",
+      "line": 227,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_led_write",
+      "line": 232,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_take_short_press",
+      "line": 237,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_take_wake_events",
+      "line": 244,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_uart_write",
+      "line": 249,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_uart_read",
+      "line": 304,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_uart_flush",
+      "line": 318,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_uart_take_overflow",
+      "line": 324,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_rtc_epoch",
+      "line": 331,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_rtc_set",
+      "line": 336,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_sleep",
+      "line": 342,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_sample_adc",
+      "line": 349,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_motion_start",
+      "line": 356,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_motion_sample",
+      "line": 361,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_motion_stop",
+      "line": 369,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_storage_read",
+      "line": 373,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "board_storage_write",
+      "line": 378,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "SystemInit",
+      "line": 388,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "test_codecs_and_cache",
+      "line": 392,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "test_at",
+      "line": 480,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "test_schedule",
+      "line": 514,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "test_application",
+      "line": 525,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "test_production_lifecycle",
+      "line": 560,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "test_russian_network",
+      "line": 617,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "test_location_failure_cleanup",
+      "line": 660,
+      "hasPurpose": true
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "name": "main",
+      "line": 689,
+      "hasPurpose": true
+    }
+  ],
+  "files": [
+    {
+      "path": "core/domain.h",
+      "beforeSha256": "522337d977791d6531c6ccaef95cf0cfc1feb70177e0ac98c07925b46f80509f",
+      "afterSha256": "1558e797b6456ea6acbf5901eb5c37d14c3ee5de184bd0f336bf0cfa1d518d0d",
+      "beforeCodeTokenSha256": "7e3751dfd773fde6be0163da2332f6b3856c3d710628546da2d01ae0a584c491",
+      "afterCodeTokenSha256": "7e3751dfd773fde6be0163da2332f6b3856c3d710628546da2d01ae0a584c491",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "core/utc_calendar.c",
+      "beforeSha256": "d0641abbcd641df60d4603dcf3bc1be223bd4e73e500770a5ebb25e1cd881a49",
+      "afterSha256": "e04ed9add538321a12521b59b5b0d351655836a4fcbfeb41769003b57257fb62",
+      "beforeCodeTokenSha256": "6df2813f4ab50d1554060ce07bf704be186d91bbbd6d68074004fd443f691683",
+      "afterCodeTokenSha256": "6df2813f4ab50d1554060ce07bf704be186d91bbbd6d68074004fd443f691683",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "core/utc_calendar.h",
+      "beforeSha256": "3a71e555973ca80a38dd0b2bc5df0b7b1b1d2b56d06900c12266dbb224493527",
+      "afterSha256": "3461d425cb2694939884e8e65c610b0ac983c7f3783f25c4d5dde6257f025f9b",
+      "beforeCodeTokenSha256": "70bd51464ae1a607dc1a6221c11725c74120d9f306098222c831483e9580ae32",
+      "afterCodeTokenSha256": "70bd51464ae1a607dc1a6221c11725c74120d9f306098222c831483e9580ae32",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "app/application.c",
+      "beforeSha256": "2926e2bfd50f8986d44095a990f979207107465e86bd7e294c98efd11b5dbceb",
+      "afterSha256": "db184125b8a5d8ad35fc734af2472c7aa4113d74a4043864480351d7f7df77c9",
+      "beforeCodeTokenSha256": "455e5d480bc414fcb73a7696892e444fa725546ce9bf33ce9061c221c197cd3b",
+      "afterCodeTokenSha256": "455e5d480bc414fcb73a7696892e444fa725546ce9bf33ce9061c221c197cd3b",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "app/application.h",
+      "beforeSha256": "636a39556f2b95f2da02856a05384b37f0aef887962618aa685389d0e17e28a6",
+      "afterSha256": "6ce4ec2d89028bcb117fccedc237087cdc679e629e4107101c421df7b91ffe02",
+      "beforeCodeTokenSha256": "c1bcad3f497ce1fe6d15478ffa3324844326c212a0075712eec9729c02cbe160",
+      "afterCodeTokenSha256": "c1bcad3f497ce1fe6d15478ffa3324844326c212a0075712eec9729c02cbe160",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "app/main.c",
+      "beforeSha256": "df9610be2182315d7035535156cf4a7fd5cf13246a724d4ee81de19fb81121e4",
+      "afterSha256": "36597d895830ac3329401fec9a84d6a89d6c2b06a961f805d20742a2882ff7b5",
+      "beforeCodeTokenSha256": "0ebeacc59f49cdddd761061c957f878b422c82df145f3d4af4225eb7a678f2ad",
+      "afterCodeTokenSha256": "0ebeacc59f49cdddd761061c957f878b422c82df145f3d4af4225eb7a678f2ad",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "beforeSha256": "211e4c752d8b2a2343ad5bf7b8d3ed0342fa3036ac0b81c5f62f25688e015924",
+      "afterSha256": "496dbaee1f1d21c3e55c7373e6a89cfbf9ba5989413575709a4361f2e21af74f",
+      "beforeCodeTokenSha256": "8dabee396e08a08b394ce54cdb6593021912a358e10e74561321333f881b9820",
+      "afterCodeTokenSha256": "8dabee396e08a08b394ce54cdb6593021912a358e10e74561321333f881b9820",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "components/location_manager.h",
+      "beforeSha256": "e60d15944e532469e77c907be719ce787d091df0a8a4d796afd29a8a2e848e4b",
+      "afterSha256": "de38b037ebc37b6c408bddfe93e1c982ba4d4956c8a95c05c23a0574a655a557",
+      "beforeCodeTokenSha256": "efb53b260feb65ff6a106821f4dadb03c93209ad3387caca373daba2af7da818",
+      "afterCodeTokenSha256": "efb53b260feb65ff6a106821f4dadb03c93209ad3387caca373daba2af7da818",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "beforeSha256": "9e77ee12919a8cb5897740d599dcefb5bc973ac33de442c95bbd20ce865cd942",
+      "afterSha256": "36fd6cda4114c07cdaeba839765c85029fca78ad4f18e6fdab87133bea7719fe",
+      "beforeCodeTokenSha256": "b588ec50487d6138aa5d62d398c757fbdf1d4015cde78d137a63cfdc7b087682",
+      "afterCodeTokenSha256": "b588ec50487d6138aa5d62d398c757fbdf1d4015cde78d137a63cfdc7b087682",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "components/network_manager.h",
+      "beforeSha256": "20a95becf9ce800045341dbcadbafb602d61f4429d6e1ffb64512c7c1070adea",
+      "afterSha256": "ad38441a5c8bb8f8a2d525bca2cb5ebf78a557a047606960a38e79d389007308",
+      "beforeCodeTokenSha256": "9551bcb99300351934bc240f0a7be464e3c82258aba9176947349fcaa139aca0",
+      "afterCodeTokenSha256": "9551bcb99300351934bc240f0a7be464e3c82258aba9176947349fcaa139aca0",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "components/sampling_service.c",
+      "beforeSha256": "8344c60765b1a78e516866461dadf723ca2f0087e5097d86ffdbb3458103d32a",
+      "afterSha256": "a135f61816830abb99f6ae8449d0bb54c325421bbb127aacf063881d7fe8dcbe",
+      "beforeCodeTokenSha256": "4eb8025055cfd18bbf2c1b3a7f252100d382e95ed5ad7519bc7dce162b4ef922",
+      "afterCodeTokenSha256": "4eb8025055cfd18bbf2c1b3a7f252100d382e95ed5ad7519bc7dce162b4ef922",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "components/sampling_service.h",
+      "beforeSha256": "2aee7ea0b605211ebeb93456f1095a7389126b57e206e05bed73b385e80dbe38",
+      "afterSha256": "b2dbd2e59c9c781c17bc036a34f10a53bbc34e09373e7d2c8feab7bf006f9219",
+      "beforeCodeTokenSha256": "4df19eea7817bea14c0a289aec5652b88d6377aba1c26efa1a417360945a5d1c",
+      "afterCodeTokenSha256": "4df19eea7817bea14c0a289aec5652b88d6377aba1c26efa1a417360945a5d1c",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "components/upload_schedule.c",
+      "beforeSha256": "02492f3b21be2f7a691a7352870b6484dd1db4390f317fa4673f4d99a5aacae1",
+      "afterSha256": "3527645b72e36086fa8e6a6607ac4e7e03562222e7e25cade20c461fe342ed52",
+      "beforeCodeTokenSha256": "cf0315b4eb2f43c0f9a1715d2a27b0cfb96bdad3e2f0ab67fab5e88510d9c280",
+      "afterCodeTokenSha256": "cf0315b4eb2f43c0f9a1715d2a27b0cfb96bdad3e2f0ab67fab5e88510d9c280",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "components/upload_schedule.h",
+      "beforeSha256": "7a36377d35a98079710d208b3577a983aa3d34bfd2fe750608688c3624476f0e",
+      "afterSha256": "4b5b3f2cbaf544af3103b62584a3cea3ebc9742d62d69c64135880bb56918608",
+      "beforeCodeTokenSha256": "04f66d6e89d1bfbb0fb4f9ab3aaacc10f3768aed282c246cd40a5cd9a8d4d013",
+      "afterCodeTokenSha256": "04f66d6e89d1bfbb0fb4f9ab3aaacc10f3768aed282c246cd40a5cd9a8d4d013",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/at_client.c",
+      "beforeSha256": "06d5fa26bb51afb50914700f2c2cd9d293cd8a3a7343972fae364cd2e09fe1ce",
+      "afterSha256": "3bf8c43f89e66cfddef647c68afed8edf49514993fcdabaeb1e0ff5c108b9bf8",
+      "beforeCodeTokenSha256": "3a07d38a53862a687d4980fbffe3f2168c799050ed38c208e73c64dc9dc98364",
+      "afterCodeTokenSha256": "3a07d38a53862a687d4980fbffe3f2168c799050ed38c208e73c64dc9dc98364",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/at_client.h",
+      "beforeSha256": "05a2af72d106832df6d4eac8e975884858f8f464850b605eef1372a8b22412cb",
+      "afterSha256": "7538cfd2310bf0c57a9640124ae059d228ec984f771f040ff38b163fc342a7c7",
+      "beforeCodeTokenSha256": "8f15fa9c23ac61b808e6e2f4596163c3fc297c049974c50c90e89dd1ee3c2ac4",
+      "afterCodeTokenSha256": "8f15fa9c23ac61b808e6e2f4596163c3fc297c049974c50c90e89dd1ee3c2ac4",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/http_service.c",
+      "beforeSha256": "e2d4d5811c4397e7f088373e37b802029c3a082b93c9b482289a61a575cc39a7",
+      "afterSha256": "616bd0707df2e4b5065f1756500534168b2c955dd5251f32ba2757d6bb08c9f9",
+      "beforeCodeTokenSha256": "510e60fd32e88b0a1704bff0f3dccda5d5b6bd39916b37a7a85430a27f4feeab",
+      "afterCodeTokenSha256": "510e60fd32e88b0a1704bff0f3dccda5d5b6bd39916b37a7a85430a27f4feeab",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/http_service.h",
+      "beforeSha256": "11aa93031e7c9d1a59bcc3370f074ca2b43b6148a31f2bc582ad62cf85b0fc03",
+      "afterSha256": "043210e4e7029af094be3d8d5b84fe00c5f592e56fde2b9d9f3fad6616d2cf4b",
+      "beforeCodeTokenSha256": "fd13ca95b7add95deac28ca92ef9f1dd765e93d281dc24fafca26f6acb89eb89",
+      "afterCodeTokenSha256": "fd13ca95b7add95deac28ca92ef9f1dd765e93d281dc24fafca26f6acb89eb89",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/identity_store.c",
+      "beforeSha256": "849b8092aebf637483d03495c1fd3c1cab5036b52d832a241e18cdd7ae39de5e",
+      "afterSha256": "8e48bcdfa7c2e9b5593af0dc0ba9d8a0adb533a107aff2e50fcb5167e60b588e",
+      "beforeCodeTokenSha256": "d4931e1add7e864a718fa2f216bce56cad92b0c427a898e702990477a43f437f",
+      "afterCodeTokenSha256": "d4931e1add7e864a718fa2f216bce56cad92b0c427a898e702990477a43f437f",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/identity_store.h",
+      "beforeSha256": "e266bc4cb145813c5438df26788d6cd02d81b2157696622fc0115cc7fe7327d7",
+      "afterSha256": "073d09ef743a29fe5f844f2a12ebf4370df123487fe403d9ee635c338b5f2a7c",
+      "beforeCodeTokenSha256": "f7afebcb91d7a6d92abff2ed709aed4b82f25dcd38591d72982bbaf53a32f38a",
+      "afterCodeTokenSha256": "f7afebcb91d7a6d92abff2ed709aed4b82f25dcd38591d72982bbaf53a32f38a",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "beforeSha256": "2fa58e920caed262c5ab08aea52dd9604287413f1570c637c83ac38efea0c6bc",
+      "afterSha256": "4cecb8425f5fcd37c127d385c0a991a7b07dd023a026a39de30ca5b4924ddca1",
+      "beforeCodeTokenSha256": "8435655667b3ba2e2da6e916918049e132e4524b3626aff1474cbbe28063c291",
+      "afterCodeTokenSha256": "8435655667b3ba2e2da6e916918049e132e4524b3626aff1474cbbe28063c291",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "beforeSha256": "74ac7970a2b083ec089799037a913520bef98cbc3744da3f27763d499f0e0ec8",
+      "afterSha256": "f1a460029ec42c129748873751b4e1a465d01633b8e666278af1d6ae8ee77f73",
+      "beforeCodeTokenSha256": "1416ac47449aaa5aa1cd40c248bd4a1f7ba47d74bb39f3dc4cff279fd1dc31a1",
+      "afterCodeTokenSha256": "1416ac47449aaa5aa1cd40c248bd4a1f7ba47d74bb39f3dc4cff279fd1dc31a1",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/record_cache.c",
+      "beforeSha256": "d2b08a67892d95ceab91198123cf930ad12259209a30a55c45c197f489f7e509",
+      "afterSha256": "db2b8113eae3c1d4dc92da27668ed70181a5629836ff750b9419525f6d56a3c7",
+      "beforeCodeTokenSha256": "ce25af7f7d3646a405fc080961c720de7d5f3cc902817fca27ebc4a20165eb0c",
+      "afterCodeTokenSha256": "ce25af7f7d3646a405fc080961c720de7d5f3cc902817fca27ebc4a20165eb0c",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/record_cache.h",
+      "beforeSha256": "969ab01ab80d8d86e534d287827154bf7f9a588da01af048a1b95afcee039de5",
+      "afterSha256": "d8966eeb95b083bebc9d28ccf1d0f719cb1048f4c67ec39bdd4160395791a6ac",
+      "beforeCodeTokenSha256": "429e555fa62268861504c1fffe3a065662cf8a70ea5e83b84066b227d2c0643c",
+      "afterCodeTokenSha256": "429e555fa62268861504c1fffe3a065662cf8a70ea5e83b84066b227d2c0643c",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/report_service.c",
+      "beforeSha256": "afcf4d2edbe6267ec8db23d5af043d449ca47c46418f252fe5fd4c24b46d60ec",
+      "afterSha256": "99ad510d343665ce19b7e180a4750d1661e0a79e4a712e2f53b9c7573cf73e5d",
+      "beforeCodeTokenSha256": "09e3aff651f3fd0f452bf98eea9b243b45e84543134c5681cfa47b04da74e1cd",
+      "afterCodeTokenSha256": "09e3aff651f3fd0f452bf98eea9b243b45e84543134c5681cfa47b04da74e1cd",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "services/report_service.h",
+      "beforeSha256": "789435d9530bcdb6d84b0558933c636cefbd8f234b719329927e71d64d2a052d",
+      "afterSha256": "f8832587c6ff940500705df1d1b1b3db3d85a4145b87a8531f11f0999a5255f1",
+      "beforeCodeTokenSha256": "9dc710743b8e0552966f1a4c06f7e02c09d5f4a2f85b8a5c5ea799de734ae471",
+      "afterCodeTokenSha256": "9dc710743b8e0552966f1a4c06f7e02c09d5f4a2f85b8a5c5ea799de734ae471",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "platform/board.c",
+      "beforeSha256": "9293ab79041f72de23548212f0631e6027ab815a0fef9ca7f8b791e346cdae0a",
+      "afterSha256": "7b4d0e2553ad74291fe21b854886c5d9ce421855156344afd61f31a3f53f0379",
+      "beforeCodeTokenSha256": "a5eb06aaae9875b065d32a9dde10f14cc495b15439de9dc0b80ec1d75d3dae39",
+      "afterCodeTokenSha256": "a5eb06aaae9875b065d32a9dde10f14cc495b15439de9dc0b80ec1d75d3dae39",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "platform/board.h",
+      "beforeSha256": "38dacc17f2b3a640127b80d90f095ec6f7b7e87ba0bb94afad338016b7ee0cae",
+      "afterSha256": "565049787af178fcdd09a05c95d0a90f4a1722b0f66363c0d8d3ead0a44795f4",
+      "beforeCodeTokenSha256": "d56f5d141cf95213f802127bef5c62936e2604940903429a70a10b77b027d7c9",
+      "afterCodeTokenSha256": "d56f5d141cf95213f802127bef5c62936e2604940903429a70a10b77b027d7c9",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "platform/board_pins.h",
+      "beforeSha256": "3dbab217403acfe7e8321daf0c1279a51dbd3c1ef87720d300efa89a5db83335",
+      "afterSha256": "86743abe98450c062b14e813d9f1a6a648fb07029a0978ca2425d140a3f599aa",
+      "beforeCodeTokenSha256": "3f3a34028df3662cd5a79a26cac3042803936d704f01b7c4919d9d4c46bc621b",
+      "afterCodeTokenSha256": "3f3a34028df3662cd5a79a26cac3042803936d704f01b7c4919d9d4c46bc621b",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "platform/interrupt_dispatch.c",
+      "beforeSha256": "36152bb7045e3e15d40242b7fde4d1683c474cea194aaabe9b2ee14b6caa3ae9",
+      "afterSha256": "1acd6faa23385588dececd4df62b8b97abfeb9111784c200b2a18aca2407cc5b",
+      "beforeCodeTokenSha256": "2946b73403d5ff180888a3f4ff5f54353a9c064059006233685e5c2e5d39b990",
+      "afterCodeTokenSha256": "2946b73403d5ff180888a3f4ff5f54353a9c064059006233685e5c2e5d39b990",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "platform/startup_hc32l130.s",
+      "beforeSha256": "af2a94cd7cfe4e659db2636db29c4cdba2ce8c6eb4ff8d082c3fa43e22ee3e75",
+      "afterSha256": "cccb989f31bfd97c4f6ac1f7dbffc532d74799d6360ad8bc308d8809d0ee9e5c",
+      "instructionsUnchanged": true
+    },
+    {
+      "path": "config/project_config.h",
+      "beforeSha256": "72fc311aa0b4fcf05b2ea3f767c5b347a1e2d0f8850b21c5645e3c36107e8e1e",
+      "afterSha256": "ecd8c7ed7af37c1d68f3e27d1ac3475842217ee27fdb697961c63f36aae5ae23",
+      "beforeCodeTokenSha256": "d7547abad67281b5f5aa2bb91b4fe8e3f3d6e680af451f6b8e38e0bbc588ad7f",
+      "afterCodeTokenSha256": "d7547abad67281b5f5aa2bb91b4fe8e3f3d6e680af451f6b8e38e0bbc588ad7f",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    },
+    {
+      "path": "tests/startup_test.s",
+      "beforeSha256": "230e5db90e961235e5bbebf85be33cc8f6031190e19f72e9907e61c7cd04b864",
+      "afterSha256": "3aba5b6a40997e4b6a7020201408558b1ccdd9cecf38c5b380c9b7caac7e7604",
+      "instructionsUnchanged": true
+    },
+    {
+      "path": "tests/test_exit.s",
+      "beforeSha256": "993c13ed0f60f62c2d8eb9e72798c0b9c964edd6be8d697f701d6fd245722ba8",
+      "afterSha256": "993c13ed0f60f62c2d8eb9e72798c0b9c964edd6be8d697f701d6fd245722ba8",
+      "instructionsUnchanged": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "beforeSha256": "1f90de824355be521eaf819a29d551409ae530d6e29d673fd59cf36f6aca1081",
+      "afterSha256": "eb5b0673bd751904bf7f86ff1b1a01c27092a4528bf9b6db7da22c7666146361",
+      "beforeCodeTokenSha256": "5cb6c4e785bde935320d7f6196f1249339381a036f72bd8158b9becadc699eed",
+      "afterCodeTokenSha256": "5cb6c4e785bde935320d7f6196f1249339381a036f72bd8158b9becadc699eed",
+      "codeTokensUnchanged": true,
+      "hasModuleContract": true
+    }
+  ],
+  "problems": [],
+  "publicInterfaces": [
+    {
+      "file": "core/utc_calendar.h",
+      "name": "utc_calendar_to_epoch",
+      "parameters": [
+        "year",
+        "month",
+        "day",
+        "hour",
+        "minute",
+        "second"
+      ],
+      "documentedParameters": [
+        "year",
+        "month",
+        "day",
+        "hour",
+        "minute",
+        "second"
+      ]
+    },
+    {
+      "file": "core/utc_calendar.h",
+      "name": "utc_calendar_from_epoch",
+      "parameters": [
+        "epoch_s",
+        "fields"
+      ],
+      "documentedParameters": [
+        "epoch_s",
+        "fields"
+      ]
+    },
+    {
+      "file": "app/application.h",
+      "name": "application_snapshot",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "app/application.h",
+      "name": "application_init",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "app/application.h",
+      "name": "application_poll",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/location_manager.h",
+      "name": "location_start",
+      "parameters": [
+        "policy",
+        "only_source",
+        "serial_number"
+      ],
+      "documentedParameters": [
+        "policy",
+        "only_source",
+        "serial_number"
+      ]
+    },
+    {
+      "file": "components/location_manager.h",
+      "name": "location_poll",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/location_manager.h",
+      "name": "location_result",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/location_manager.h",
+      "name": "location_position",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/location_manager.h",
+      "name": "location_rsrp_dbm",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/location_manager.h",
+      "name": "location_cancel",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/network_manager.h",
+      "name": "network_start",
+      "parameters": [
+        "identity"
+      ],
+      "documentedParameters": [
+        "identity"
+      ]
+    },
+    {
+      "file": "components/network_manager.h",
+      "name": "network_poll",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/network_manager.h",
+      "name": "network_result",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/network_manager.h",
+      "name": "network_snapshot",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/network_manager.h",
+      "name": "network_shutdown_start",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/network_manager.h",
+      "name": "network_shutdown_poll",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/sampling_service.h",
+      "name": "sampling_start",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/sampling_service.h",
+      "name": "sampling_poll",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/sampling_service.h",
+      "name": "sampling_result",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/sampling_service.h",
+      "name": "sampling_copy",
+      "parameters": [
+        "record"
+      ],
+      "documentedParameters": [
+        "record"
+      ]
+    },
+    {
+      "file": "components/sampling_service.h",
+      "name": "sampling_cancel",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "components/upload_schedule.h",
+      "name": "upload_schedule_init",
+      "parameters": [
+        "schedule",
+        "now_ms"
+      ],
+      "documentedParameters": [
+        "schedule",
+        "now_ms"
+      ]
+    },
+    {
+      "file": "components/upload_schedule.h",
+      "name": "upload_schedule_due",
+      "parameters": [
+        "schedule",
+        "config",
+        "moving",
+        "now_ms"
+      ],
+      "documentedParameters": [
+        "schedule",
+        "config",
+        "moving",
+        "now_ms"
+      ]
+    },
+    {
+      "file": "components/upload_schedule.h",
+      "name": "upload_schedule_complete",
+      "parameters": [
+        "schedule",
+        "moving",
+        "now_ms"
+      ],
+      "documentedParameters": [
+        "schedule",
+        "moving",
+        "now_ms"
+      ]
+    },
+    {
+      "file": "services/at_client.h",
+      "name": "at_init",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/at_client.h",
+      "name": "at_poll",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/at_client.h",
+      "name": "at_start",
+      "parameters": [
+        "text",
+        "length",
+        "raw",
+        "expected",
+        "timeout_ms"
+      ],
+      "documentedParameters": [
+        "text",
+        "length",
+        "raw",
+        "expected",
+        "timeout_ms"
+      ]
+    },
+    {
+      "file": "services/at_client.h",
+      "name": "at_result",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/at_client.h",
+      "name": "at_response",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/at_client.h",
+      "name": "at_cancel",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/at_client.h",
+      "name": "at_command_step",
+      "parameters": [
+        "step",
+        "command",
+        "expected",
+        "timeout_ms"
+      ],
+      "documentedParameters": [
+        "step",
+        "command",
+        "expected",
+        "timeout_ms"
+      ]
+    },
+    {
+      "file": "services/at_client.h",
+      "name": "at_payload_step",
+      "parameters": [
+        "step",
+        "bytes",
+        "count",
+        "expected",
+        "timeout_ms"
+      ],
+      "documentedParameters": [
+        "step",
+        "bytes",
+        "count",
+        "expected",
+        "timeout_ms"
+      ]
+    },
+    {
+      "file": "services/http_service.h",
+      "name": "http_start",
+      "parameters": [
+        "url",
+        "body"
+      ],
+      "documentedParameters": [
+        "url",
+        "body"
+      ]
+    },
+    {
+      "file": "services/http_service.h",
+      "name": "http_poll",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/http_service.h",
+      "name": "http_result",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/http_service.h",
+      "name": "http_response",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/http_service.h",
+      "name": "http_cancel",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/identity_store.h",
+      "name": "identity_store_read",
+      "parameters": [
+        "serial_number"
+      ],
+      "documentedParameters": [
+        "serial_number"
+      ]
+    },
+    {
+      "file": "services/identity_store.h",
+      "name": "identity_store_serial",
+      "parameters": [
+        "serial_number"
+      ],
+      "documentedParameters": [
+        "serial_number"
+      ]
+    },
+    {
+      "file": "services/identity_store.h",
+      "name": "identity_store_checked",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/identity_store.h",
+      "name": "identity_store_activated",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/identity_store.h",
+      "name": "identity_store_mark_checked",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/identity_store.h",
+      "name": "identity_store_mark_activated",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_parse_config",
+      "parameters": [
+        "response",
+        "output"
+      ],
+      "documentedParameters": [
+        "response",
+        "output"
+      ]
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_is_approved",
+      "parameters": [
+        "response"
+      ],
+      "documentedParameters": [
+        "response"
+      ]
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_parse_gnss",
+      "parameters": [
+        "response",
+        "output"
+      ],
+      "documentedParameters": [
+        "response",
+        "output"
+      ]
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_parse_position",
+      "parameters": [
+        "response",
+        "output"
+      ],
+      "documentedParameters": [
+        "response",
+        "output"
+      ]
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_parse_cell",
+      "parameters": [
+        "response",
+        "output"
+      ],
+      "documentedParameters": [
+        "response",
+        "output"
+      ]
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_parse_neighbors",
+      "parameters": [
+        "response",
+        "cell"
+      ],
+      "documentedParameters": [
+        "response",
+        "cell"
+      ]
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_build_cell_url",
+      "parameters": [
+        "cell",
+        "serial_number",
+        "output",
+        "capacity"
+      ],
+      "documentedParameters": [
+        "cell",
+        "serial_number",
+        "output",
+        "capacity"
+      ]
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_build_report",
+      "parameters": [
+        "record",
+        "identity",
+        "check",
+        "output",
+        "capacity",
+        "length"
+      ],
+      "documentedParameters": [
+        "record",
+        "identity",
+        "check",
+        "output",
+        "capacity",
+        "length"
+      ]
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_parse_digits",
+      "parameters": [
+        "response",
+        "prefix",
+        "output",
+        "capacity",
+        "minimum"
+      ],
+      "documentedParameters": [
+        "response",
+        "prefix",
+        "output",
+        "capacity",
+        "minimum"
+      ]
+    },
+    {
+      "file": "services/protocol_codec.h",
+      "name": "protocol_parse_ntp",
+      "parameters": [
+        "response",
+        "epoch_s"
+      ],
+      "documentedParameters": [
+        "response",
+        "epoch_s"
+      ]
+    },
+    {
+      "file": "services/record_cache.h",
+      "name": "record_cache_init",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/record_cache.h",
+      "name": "record_cache_push",
+      "parameters": [
+        "record"
+      ],
+      "documentedParameters": [
+        "record"
+      ]
+    },
+    {
+      "file": "services/record_cache.h",
+      "name": "record_cache_peek",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/record_cache.h",
+      "name": "record_cache_pop",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/record_cache.h",
+      "name": "record_cache_count",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/record_cache.h",
+      "name": "record_cache_dropped",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/report_service.h",
+      "name": "report_start",
+      "parameters": [
+        "record",
+        "identity",
+        "check"
+      ],
+      "documentedParameters": [
+        "record",
+        "identity",
+        "check"
+      ]
+    },
+    {
+      "file": "services/report_service.h",
+      "name": "report_poll",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/report_service.h",
+      "name": "report_result",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/report_service.h",
+      "name": "report_outcome",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "services/report_service.h",
+      "name": "report_cancel",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_init",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_now_ms",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_modem_supply",
+      "parameters": [
+        "enabled"
+      ],
+      "documentedParameters": [
+        "enabled"
+      ]
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_modem_key",
+      "parameters": [
+        "high"
+      ],
+      "documentedParameters": [
+        "high"
+      ]
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_led_write",
+      "parameters": [
+        "high"
+      ],
+      "documentedParameters": [
+        "high"
+      ]
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_take_short_press",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_take_wake_events",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_uart_write",
+      "parameters": [
+        "bytes",
+        "count"
+      ],
+      "documentedParameters": [
+        "bytes",
+        "count"
+      ]
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_uart_read",
+      "parameters": [
+        "byte"
+      ],
+      "documentedParameters": [
+        "byte"
+      ]
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_uart_flush",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_uart_take_overflow",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_rtc_epoch",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_rtc_set",
+      "parameters": [
+        "epoch_s"
+      ],
+      "documentedParameters": [
+        "epoch_s"
+      ]
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_sleep",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_sample_adc",
+      "parameters": [
+        "battery_v",
+        "temperature_legacy"
+      ],
+      "documentedParameters": [
+        "battery_v",
+        "temperature_legacy"
+      ]
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_motion_start",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_motion_sample",
+      "parameters": [
+        "axes_g"
+      ],
+      "documentedParameters": [
+        "axes_g"
+      ]
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_motion_stop",
+      "parameters": [],
+      "documentedParameters": []
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_storage_read",
+      "parameters": [
+        "offset"
+      ],
+      "documentedParameters": [
+        "offset"
+      ]
+    },
+    {
+      "file": "platform/board.h",
+      "name": "board_storage_write",
+      "parameters": [
+        "offset",
+        "value"
+      ],
+      "documentedParameters": [
+        "offset",
+        "value"
+      ]
+    }
+  ],
+  "firmware": [
+    {
+      "kind": "offline",
+      "path": "build/HC32L130_Refactored.hex",
+      "beforeSha256": "bace0fb0b0347a7407af12f44b86da25c33bd6e6f9118b202f4b24b94e1879b5",
+      "afterSha256": "bace0fb0b0347a7407af12f44b86da25c33bd6e6f9118b202f4b24b94e1879b5",
+      "unchanged": true
+    },
+    {
+      "kind": "mdk",
+      "path": "build/mdk/HC32L130_Refactored.hex",
+      "beforeSha256": "53f6bd696a242d31bf12989008a7b83a8c2b562e4235d2c4703cbeb32b89fae9",
+      "afterSha256": "53f6bd696a242d31bf12989008a7b83a8c2b562e4235d2c4703cbeb32b89fae9",
+      "unchanged": true
+    }
+  ],
+  "untouchedFiles": {
+    "count": 101,
+    "changed": []
+  }
+}

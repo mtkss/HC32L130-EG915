@@ -1,0 +1,33 @@
+{
+  "files": 31,
+  "dependencies": {
+    "core": [],
+    "app": [
+      "platform",
+      "services",
+      "components",
+      "config",
+      "core"
+    ],
+    "components": [
+      "services",
+      "config",
+      "platform",
+      "core"
+    ],
+    "services": [
+      "platform",
+      "config",
+      "core"
+    ],
+    "platform": [
+      "config",
+      "core"
+    ],
+    "config": []
+  },
+  "missingIncludes": [],
+  "exportedMutableExterns": [],
+  "undocumentedHeaderFunctions": [],
+  "cycles": []
+}

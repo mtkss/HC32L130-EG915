@@ -1,0 +1,862 @@
+{
+  "project": "HC32L130_Refactored_20261116",
+  "date": "2026-11-16",
+  "sourceRoot": "D:/download/hc32l130f8ua_template",
+  "toolchain": "ARMCC5.06 update7 build960",
+  "verification": {
+    "armccErrors": 0,
+    "mdkErrors": 0,
+    "mdkWarnings": 2,
+    "testChecks": 123,
+    "testFailures": 0,
+    "romBytes": 26672,
+    "ramBytes": 7416,
+    "stackBytes": 2048,
+    "flashCodeLimit": "0xEE00",
+    "hardwareTested": false,
+    "flashed": false
+  },
+  "files": [
+    {
+      "path": ".clang-format",
+      "bytes": 315,
+      "sha256": "64f59991591bc6f72ab66a0153103d20ab9dfa269104ab55a9f0c78ada12c7a3"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 63,
+      "sha256": "a4a62d4fd9ca8801625c616181f45174946617fcc10c88d856e50328b60f012e"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 1281,
+      "sha256": "5d97f0c997ab26da437f261f38400c18579b9ab4444dffcbc47fbc30e96c7fc5"
+    },
+    {
+      "path": "MDK/HC32L130_Refactored.sct",
+      "bytes": 270,
+      "sha256": "6bb132488eabe3d768a2515580a7c9e4e5e0f2f73769a1bb1034fc42ccae677a"
+    },
+    {
+      "path": "MDK/HC32L130_Refactored.uvprojx",
+      "bytes": 17511,
+      "sha256": "496d55ec75c2425ddbc402fdeb2c315b2aed9c3ba308c90c5aa67eceb5a0fb52"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2708,
+      "sha256": "5ad6c6f03230bd2becbc191f4584e3648e12758b053edbe91b1eb6e859ffc041"
+    },
+    {
+      "path": "app/application.c",
+      "bytes": 17970,
+      "sha256": "db184125b8a5d8ad35fc734af2472c7aa4113d74a4043864480351d7f7df77c9"
+    },
+    {
+      "path": "app/application.h",
+      "bytes": 3170,
+      "sha256": "6ce4ec2d89028bcb117fccedc237087cdc679e629e4107101c421df7b91ffe02"
+    },
+    {
+      "path": "app/main.c",
+      "bytes": 572,
+      "sha256": "36597d895830ac3329401fec9a84d6a89d6c2b06a961f805d20742a2882ff7b5"
+    },
+    {
+      "path": "baseline/example/MDK/HC32L130F8UA.uvprojx",
+      "bytes": 21242,
+      "sha256": "27d740ce20f0457a156af337c4c4939fa2432b05a3cb7c7b625b7cdb9d3b28fc"
+    },
+    {
+      "path": "baseline/example/MDK/src/hardware.c",
+      "bytes": 41090,
+      "sha256": "5160ec7cc638ba0935425253d4c7648d8e93e465b98273dfe9f3e8a68c31a498"
+    },
+    {
+      "path": "baseline/example/MDK/src/network_strategy.c",
+      "bytes": 6768,
+      "sha256": "add010d6a01b95f8fb9012957edc9d6c55167b80e709ae352ff7a0d14a383dbf"
+    },
+    {
+      "path": "baseline/example/MDK/src/serial.c",
+      "bytes": 71710,
+      "sha256": "ced98f808a19c38f5f948c46da46f3363148c492c7d6d2d59507354eaae74f1b"
+    },
+    {
+      "path": "baseline/example/source/main.c",
+      "bytes": 65856,
+      "sha256": "d87b07fd28676b9195e5e40519782fa44e81c0b6a4c9d3c9fcbbbde3510aec96"
+    },
+    {
+      "path": "components/location_manager.c",
+      "bytes": 11795,
+      "sha256": "496dbaee1f1d21c3e55c7373e6a89cfbf9ba5989413575709a4361f2e21af74f"
+    },
+    {
+      "path": "components/location_manager.h",
+      "bytes": 2306,
+      "sha256": "de38b037ebc37b6c408bddfe93e1c982ba4d4956c8a95c05c23a0574a655a557"
+    },
+    {
+      "path": "components/network_manager.c",
+      "bytes": 17092,
+      "sha256": "36fd6cda4114c07cdaeba839765c85029fca78ad4f18e6fdab87133bea7719fe"
+    },
+    {
+      "path": "components/network_manager.h",
+      "bytes": 2793,
+      "sha256": "ad38441a5c8bb8f8a2d525bca2cb5ebf78a557a047606960a38e79d389007308"
+    },
+    {
+      "path": "components/sampling_service.c",
+      "bytes": 3789,
+      "sha256": "a135f61816830abb99f6ae8449d0bb54c325421bbb127aacf063881d7fe8dcbe"
+    },
+    {
+      "path": "components/sampling_service.h",
+      "bytes": 1878,
+      "sha256": "b2dbd2e59c9c781c17bc036a34f10a53bbc34e09373e7d2c8feab7bf006f9219"
+    },
+    {
+      "path": "components/upload_schedule.c",
+      "bytes": 2173,
+      "sha256": "3527645b72e36086fa8e6a6607ac4e7e03562222e7e25cade20c461fe342ed52"
+    },
+    {
+      "path": "components/upload_schedule.h",
+      "bytes": 2475,
+      "sha256": "4b5b3f2cbaf544af3103b62584a3cea3ebc9742d62d69c64135880bb56918608"
+    },
+    {
+      "path": "config/project_config.h",
+      "bytes": 4168,
+      "sha256": "ecd8c7ed7af37c1d68f3e27d1ac3475842217ee27fdb697961c63f36aae5ae23"
+    },
+    {
+      "path": "core/domain.h",
+      "bytes": 7014,
+      "sha256": "1558e797b6456ea6acbf5901eb5c37d14c3ee5de184bd0f336bf0cfa1d518d0d"
+    },
+    {
+      "path": "core/utc_calendar.c",
+      "bytes": 2118,
+      "sha256": "e04ed9add538321a12521b59b5b0d351655836a4fcbfeb41769003b57257fb62"
+    },
+    {
+      "path": "core/utc_calendar.h",
+      "bytes": 1321,
+      "sha256": "3461d425cb2694939884e8e65c610b0ac983c7f3783f25c4d5dde6257f025f9b"
+    },
+    {
+      "path": "docs/新工程运行说明.md",
+      "bytes": 4502,
+      "sha256": "b9515b6922e760d2f937c5f63120592b0f332bd721592ec62df99d55ae5343bd"
+    },
+    {
+      "path": "docs/架构与兼容边界.md",
+      "bytes": 3461,
+      "sha256": "e17d2ce8a13202539990e38b5189649f2156b61e8d0a09ecc90a8ab21b4bc600"
+    },
+    {
+      "path": "docs/模块边界核验.json",
+      "bytes": 508,
+      "sha256": "bcd82459ad18a26a082dcc8501574e1b0b0e0764a75106790f61d7bc1a430789"
+    },
+    {
+      "path": "docs/注释规范核验.json",
+      "bytes": 54977,
+      "sha256": "559b5b44d314d105fc9ef95c03e81ebf907bc80dafdb22a5951e4882fd58f385"
+    },
+    {
+      "path": "docs/注释规范核验.md",
+      "bytes": 3148,
+      "sha256": "c5256874a04fb4d5beb29dd7fef38af0a5a8684562f0c1d1bd8a57f04c7292eb"
+    },
+    {
+      "path": "docs/源工程只读核验.json",
+      "bytes": 89,
+      "sha256": "2bccc4701f0c9e2a8cd09ebdbb1b4e3ed2865583ce2b00461af428cf92c607dc"
+    },
+    {
+      "path": "docs/重构迁移与行为变更.md",
+      "bytes": 5265,
+      "sha256": "c6b6c4cb087317ec8085646c2b1e0169fc879cba407681c004213bedff299d4f"
+    },
+    {
+      "path": "docs/验证记录.md",
+      "bytes": 4095,
+      "sha256": "c77a33e3042b3f345617bb54e05a7d0a164be30df00cff56ad364e570dddb3fc"
+    },
+    {
+      "path": "platform/board.c",
+      "bytes": 25266,
+      "sha256": "7b4d0e2553ad74291fe21b854886c5d9ce421855156344afd61f31a3f53f0379"
+    },
+    {
+      "path": "platform/board.h",
+      "bytes": 7469,
+      "sha256": "565049787af178fcdd09a05c95d0a90f4a1722b0f66363c0d8d3ead0a44795f4"
+    },
+    {
+      "path": "platform/board_pins.h",
+      "bytes": 2217,
+      "sha256": "86743abe98450c062b14e813d9f1a6a648fb07029a0978ca2425d140a3f599aa"
+    },
+    {
+      "path": "platform/interrupt_dispatch.c",
+      "bytes": 1446,
+      "sha256": "1acd6faa23385588dececd4df62b8b97abfeb9111784c200b2a18aca2407cc5b"
+    },
+    {
+      "path": "platform/startup_hc32l130.s",
+      "bytes": 11140,
+      "sha256": "cccb989f31bfd97c4f6ac1f7dbffc532d74799d6360ad8bc308d8809d0ee9e5c"
+    },
+    {
+      "path": "services/at_client.c",
+      "bytes": 8846,
+      "sha256": "3bf8c43f89e66cfddef647c68afed8edf49514993fcdabaeb1e0ff5c108b9bf8"
+    },
+    {
+      "path": "services/at_client.h",
+      "bytes": 4599,
+      "sha256": "7538cfd2310bf0c57a9640124ae059d228ec984f771f040ff38b163fc342a7c7"
+    },
+    {
+      "path": "services/http_service.c",
+      "bytes": 4886,
+      "sha256": "616bd0707df2e4b5065f1756500534168b2c955dd5251f32ba2757d6bb08c9f9"
+    },
+    {
+      "path": "services/http_service.h",
+      "bytes": 1881,
+      "sha256": "043210e4e7029af094be3d8d5b84fe00c5f592e56fde2b9d9f3fad6616d2cf4b"
+    },
+    {
+      "path": "services/identity_store.c",
+      "bytes": 2563,
+      "sha256": "8e48bcdfa7c2e9b5593af0dc0ba9d8a0adb533a107aff2e50fcb5167e60b588e"
+    },
+    {
+      "path": "services/identity_store.h",
+      "bytes": 2075,
+      "sha256": "073d09ef743a29fe5f844f2a12ebf4370df123487fe403d9ee635c338b5f2a7c"
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "bytes": 16826,
+      "sha256": "4cecb8425f5fcd37c127d385c0a991a7b07dd023a026a39de30ca5b4924ddca1"
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "bytes": 6144,
+      "sha256": "f1a460029ec42c129748873751b4e1a465d01633b8e666278af1d6ae8ee77f73"
+    },
+    {
+      "path": "services/record_cache.c",
+      "bytes": 2448,
+      "sha256": "db2b8113eae3c1d4dc92da27668ed70181a5629836ff750b9419525f6d56a3c7"
+    },
+    {
+      "path": "services/record_cache.h",
+      "bytes": 1631,
+      "sha256": "d8966eeb95b083bebc9d28ccf1d0f719cb1048f4c67ec39bdd4160395791a6ac"
+    },
+    {
+      "path": "services/report_service.c",
+      "bytes": 2814,
+      "sha256": "99ad510d343665ce19b7e180a4750d1661e0a79e4a712e2f53b9c7573cf73e5d"
+    },
+    {
+      "path": "services/report_service.h",
+      "bytes": 2551,
+      "sha256": "f8832587c6ff940500705df1d1b1b3db3d85a4145b87a8531f11f0999a5255f1"
+    },
+    {
+      "path": "tests/startup_test.s",
+      "bytes": 11122,
+      "sha256": "3aba5b6a40997e4b6a7020201408558b1ccdd9cecf38c5b380c9b7caac7e7604"
+    },
+    {
+      "path": "tests/test.sct",
+      "bytes": 166,
+      "sha256": "e44e70c05a847536271c5bb3d6388488a600891e37095a2bf549b1cc539abeec"
+    },
+    {
+      "path": "tests/test_exit.s",
+      "bytes": 291,
+      "sha256": "993c13ed0f60f62c2d8eb9e72798c0b9c964edd6be8d697f701d6fd245722ba8"
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "bytes": 24057,
+      "sha256": "eb5b0673bd751904bf7f86ff1b1a01c27092a4528bf9b6db7da22c7666146361"
+    },
+    {
+      "path": "tools/build.ps1",
+      "bytes": 3851,
+      "sha256": "6fc7286effe38faa09ea85a25c4fa5a0791ac1da2d823fe50b3f32e21d8d7977"
+    },
+    {
+      "path": "tools/format.ps1",
+      "bytes": 991,
+      "sha256": "b55c2d1adad4056cfd9bbcf876bb6ad8800e5ece6b7cd93062da79ba083b8071"
+    },
+    {
+      "path": "tools/package_project.py",
+      "bytes": 1342,
+      "sha256": "370f0aa7400b9895162f940b832b49b5ffb0e95f7ccb6d34c1e4293dd2200c41"
+    },
+    {
+      "path": "tools/run_arm_tests.py",
+      "bytes": 4198,
+      "sha256": "b75bb9effce45152e36c76334d8a8d783bedbf0ef6b449a4aa325302e4f3671d"
+    },
+    {
+      "path": "tools/setup_tests.ps1",
+      "bytes": 764,
+      "sha256": "50bdbe233215c1d9b7b809e5ebf45fe1f7b2c1d623cf7f018c97996d00b9d100"
+    },
+    {
+      "path": "tools/test.ps1",
+      "bytes": 3395,
+      "sha256": "d334906b22d612cb0b509d1f03bfcb4779376fdbf63664dafe14b165192921bd"
+    },
+    {
+      "path": "tools/test_requirements.txt",
+      "bytes": 53,
+      "sha256": "096190aa0fbfb9a7c49b7c02c91afcd19c15b18683bec01591bd839dd9e2c72c"
+    },
+    {
+      "path": "vendor/CMSIS/Include/arm_common_tables.h",
+      "bytes": 7265,
+      "sha256": "f72ba38e903aa120c1d616376e20ce16c034608aaa81d23c0a9ab73551cc2790"
+    },
+    {
+      "path": "vendor/CMSIS/Include/arm_const_structs.h",
+      "bytes": 3942,
+      "sha256": "7b5f63fa5ed80a98068c4157c5f9073cdc1a432016c3916ae3028140c617583c"
+    },
+    {
+      "path": "vendor/CMSIS/Include/arm_math.h",
+      "bytes": 252339,
+      "sha256": "b43af47de79e6530b89d5d4e76bdb92bc720aa93e30f9edbd6e9498234453ad5"
+    },
+    {
+      "path": "vendor/CMSIS/Include/cmsis_armcc.h",
+      "bytes": 24423,
+      "sha256": "5b29eb32bdff5d5ffbad7e569032f5f3eb7965f5dd020649f4bfb1b10d921fa1"
+    },
+    {
+      "path": "vendor/CMSIS/Include/cmsis_armcc_V6.h",
+      "bytes": 55083,
+      "sha256": "839baa3a7250e43e1fba483fad7991f82f080663ae2f4770b60d2aa0578bc727"
+    },
+    {
+      "path": "vendor/CMSIS/Include/cmsis_gcc.h",
+      "bytes": 41435,
+      "sha256": "47141b42268bfa9730d4f58673587ccb6dc325f87ee49f4463f879353b59aee5"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_cm0.h",
+      "bytes": 37218,
+      "sha256": "3575b8cbf75a3098a238aa0d9bb707b648620d3bd6605873a94502eec0fcda1a"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_cm0plus.h",
+      "bytes": 44796,
+      "sha256": "ab2233d3f4cc16a65a06bccdf84a3fed7381b3317e775275559b86a3d914e49e"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_cm3.h",
+      "bytes": 103909,
+      "sha256": "bebfc543eaaecdf1b65a2bf0c6972ffc4aca70e23e51a77ba32c22ba03d9c1da"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_cm4.h",
+      "bytes": 114498,
+      "sha256": "71ff7bdf773aad4a5577e600a7e153f0c456989ede0392d602d0fe97a65a83bb"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_cm7.h",
+      "bytes": 139660,
+      "sha256": "3d2ee831b70f0c048c8990a6f44a0af6929459338ebbe5b386aa23c3fc273dd0"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_cmFunc.h",
+      "bytes": 3620,
+      "sha256": "86612ceb6e46e6a283bff6f6f6a9ca6fdbad84558c5397fa4e94e33c9b6584bb"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_cmInstr.h",
+      "bytes": 3636,
+      "sha256": "64ac7b35052b73765e2bb38e95ad1888ab89bc120fa61a8c17d974eede6ceea7"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_cmSimd.h",
+      "bytes": 3662,
+      "sha256": "34f1242c7c66131f3b080584ff7121b9ce745ebf7d83efa10d38b50d5d554de7"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_sc000.h",
+      "bytes": 45262,
+      "sha256": "827cab99e4ad309e38ef8aef318dc2cb5a971e29a4cbad0815ccedcd5fff9762"
+    },
+    {
+      "path": "vendor/CMSIS/Include/core_sc300.h",
+      "bytes": 102809,
+      "sha256": "ca8ae454a26c29c9ebcde4e138176d9806eafd0bafde332faa66b36a27c92df3"
+    },
+    {
+      "path": "vendor/RTT/SEGGER_RTT.c",
+      "bytes": 47894,
+      "sha256": "98db5082bff13576028d06344d5f192bf848059b5fc3cc1f2dadff1311de3b8b"
+    },
+    {
+      "path": "vendor/RTT/SEGGER_RTT.h",
+      "bytes": 13293,
+      "sha256": "b052b414295b1072d470dd58433922e5b95ac4c4d9e2a721b18463092f5177b2"
+    },
+    {
+      "path": "vendor/RTT/SEGGER_RTT_Conf.h",
+      "bytes": 16998,
+      "sha256": "e8133265140d03cceee1316dffefa93534d7a2ff267c3e6c96b862027108c026"
+    },
+    {
+      "path": "vendor/RTT/SEGGER_RTT_printf.c",
+      "bytes": 17648,
+      "sha256": "a6fca4f595f5fef4cf23ec97ba836a9919c994bf2ddade7fe9c64b84f5017600"
+    },
+    {
+      "path": "vendor/common/base_types.h",
+      "bytes": 6516,
+      "sha256": "7bcdd3bc821e0634e7c9758c786a4a65dfa397316cb11d5d11865a765819e7d4"
+    },
+    {
+      "path": "vendor/common/board_stkhc32l13x.h",
+      "bytes": 4456,
+      "sha256": "9f7f80f51b78734579e9462ff4fc934485022cfe2910788a79d617a667fe9ddd"
+    },
+    {
+      "path": "vendor/common/ddl_device.h",
+      "bytes": 3380,
+      "sha256": "0fec1f596ad3b7a4ad0b511ea2b302daf43f09e3ef9b8e225052d06371e32827"
+    },
+    {
+      "path": "vendor/common/hc32l130f8ua.h",
+      "bytes": 242674,
+      "sha256": "ca8388a96c81cc91f9ee5d5c21e39a3a4d40ac570765efe7b360de8454fc512d"
+    },
+    {
+      "path": "vendor/common/hc32l13x.h",
+      "bytes": 292821,
+      "sha256": "03eb8c867688f88e7ced2061b7e355432eaef6b15ac43b91848b4df3cacbf23d"
+    },
+    {
+      "path": "vendor/common/interrupts_hc32l13x.c",
+      "bytes": 16946,
+      "sha256": "12803325b88a2a4a5d729ca01d244ba2a0cf24e5738633ed7c7aca57b8671a05"
+    },
+    {
+      "path": "vendor/common/interrupts_hc32l13x.h",
+      "bytes": 7247,
+      "sha256": "1a5cde3e38acc7c563ebd69b712751aa9ae5232459fa7b3d91b995a297d6a5e1"
+    },
+    {
+      "path": "vendor/common/startup_hc32l13x.s",
+      "bytes": 11019,
+      "sha256": "1f7f22cfd8e0c18de903bbfff5a83224c15852b3d3d885532ca9361d6faa0303"
+    },
+    {
+      "path": "vendor/common/system_hc32l130f8ua.c",
+      "bytes": 2148,
+      "sha256": "b1cecbd0105344a7c482c0f0a6e5550d2952ff7b5c8481f6fe598d8a14394d1a"
+    },
+    {
+      "path": "vendor/common/system_hc32l130f8ua.h",
+      "bytes": 3085,
+      "sha256": "52dc288dd5f615c73fbad159db68ecbbd4fa29b6bf86cadf0bbe27eecca448b9"
+    },
+    {
+      "path": "vendor/common/system_hc32l13x.c",
+      "bytes": 7628,
+      "sha256": "94b2b9e84d676fd132a5d090ae6d03e117ae65d9ff524cb0d2f5a4290614f1d5"
+    },
+    {
+      "path": "vendor/common/system_hc32l13x.h",
+      "bytes": 4998,
+      "sha256": "8e9c0b2a17b17ee33560eca39c5a6534b40a057be693b3ce0fae108682fcc29d"
+    },
+    {
+      "path": "vendor/driver/inc/adc.h",
+      "bytes": 21963,
+      "sha256": "b5fd09a0f2a77f9bd0d07f4e1dd2351ac1bdd05af4b0671ead258c45ddd45ae2"
+    },
+    {
+      "path": "vendor/driver/inc/adt.h",
+      "bytes": 40069,
+      "sha256": "97bd0885853d5ab3e5bdd3454162c9e7bca67ec93bb62e2f79b4553d0865cd12"
+    },
+    {
+      "path": "vendor/driver/inc/aes.h",
+      "bytes": 4983,
+      "sha256": "f1b19404f0331d912b07aa2d6c0b5c45761b6bf835e51a20388653f53d89a869"
+    },
+    {
+      "path": "vendor/driver/inc/bgr.h",
+      "bytes": 4568,
+      "sha256": "9d6f729e9ac8e5ce9335420d097b012cd3d34bbfb943326d6615ee8ab3dd19c4"
+    },
+    {
+      "path": "vendor/driver/inc/bt.h",
+      "bytes": 36207,
+      "sha256": "cfb16a776a7cb46440470469d1ebc917e0634dc3da5de821c7d721983418a37f"
+    },
+    {
+      "path": "vendor/driver/inc/crc.h",
+      "bytes": 5341,
+      "sha256": "0133f0689be719e51a8bca6091cd5958b52681e9ce6c84f2eadae15e968ad123"
+    },
+    {
+      "path": "vendor/driver/inc/ddl.h",
+      "bytes": 7245,
+      "sha256": "db7df323f61790105a9a5e2631ffaf2f703b7432fec2299a68f2114c19e19909"
+    },
+    {
+      "path": "vendor/driver/inc/debug.h",
+      "bytes": 5597,
+      "sha256": "20e105b9b7e98d29e55086f72d9a56025d7c77a93c79f5983fa9a99773b04f5d"
+    },
+    {
+      "path": "vendor/driver/inc/dmac.h",
+      "bytes": 17321,
+      "sha256": "e1ebabb77abad9dc9e8126b299c3036fe896c559ef87cb231a2f8b41dc312033"
+    },
+    {
+      "path": "vendor/driver/inc/flash.h",
+      "bytes": 7422,
+      "sha256": "0c23c473fbbc97e281d2da734d69851d6e2140b4297b0c37a0afd6be721df311"
+    },
+    {
+      "path": "vendor/driver/inc/gpio.h",
+      "bytes": 21112,
+      "sha256": "6530087e7445802d9cb6f73a7f7dac151aee3742c3b29256955dae219653f1e0"
+    },
+    {
+      "path": "vendor/driver/inc/hdiv.h",
+      "bytes": 4975,
+      "sha256": "411f63eaa1ac2f93c9516f7918a36f41b7cee1b37f3fb83ac5001a6884d82562"
+    },
+    {
+      "path": "vendor/driver/inc/i2c.h",
+      "bytes": 6102,
+      "sha256": "3810fed2780599aa109b192dd5452507a0e3c181f831167a001033aa27d6f7a6"
+    },
+    {
+      "path": "vendor/driver/inc/lcd.h",
+      "bytes": 9419,
+      "sha256": "c02f2947f22e473d766eea0c6dd4313fe3b63e6c11bfbf05bedaccd37f33def7"
+    },
+    {
+      "path": "vendor/driver/inc/lpm.h",
+      "bytes": 4354,
+      "sha256": "15ac88598a56b810b43e2bb74cca503c4bdcd011c63f86f0cb491da57254c9b4"
+    },
+    {
+      "path": "vendor/driver/inc/lptim.h",
+      "bytes": 6553,
+      "sha256": "5a0bcaeb7498c7919454fe22c2918a485c87429de5e6698758f9da68e1e7506a"
+    },
+    {
+      "path": "vendor/driver/inc/lpuart.h",
+      "bytes": 11578,
+      "sha256": "a4c000fb79b0327e60b35f6841e9f023b927c81c2d22891ab0dfc555b7950316"
+    },
+    {
+      "path": "vendor/driver/inc/lvd.h",
+      "bytes": 9163,
+      "sha256": "85b639c31e4da09e0fd9e8a2362ddc65c3a06c9140d522cb3f53fea7cef9ba2e"
+    },
+    {
+      "path": "vendor/driver/inc/opa.h",
+      "bytes": 8538,
+      "sha256": "0d54961c2657c44b1392b25a8f3dac41a0208983d994bcdc430af10290c61b12"
+    },
+    {
+      "path": "vendor/driver/inc/pca.h",
+      "bytes": 10244,
+      "sha256": "82329721c63c7667ac7bbee6f582d7b90b1e6fafe53709d63a6cbdd3453558df"
+    },
+    {
+      "path": "vendor/driver/inc/pcnt.h",
+      "bytes": 8897,
+      "sha256": "2eea946162b4ec34934a966aac7b7abeb07a3dff84531aedd2eba031c17f8e8b"
+    },
+    {
+      "path": "vendor/driver/inc/ram.h",
+      "bytes": 5080,
+      "sha256": "58a6f107a0223aa87599e20616b5c21f748097dd14f757222ca7479994ce9c4b"
+    },
+    {
+      "path": "vendor/driver/inc/reset.h",
+      "bytes": 7047,
+      "sha256": "a4c2aef7e8374646499d16731d1a630d3bccb27cb89b79573b8743dbec6a3865"
+    },
+    {
+      "path": "vendor/driver/inc/rtc.h",
+      "bytes": 10277,
+      "sha256": "6f02be3c49153d06c82af199951b0f96d357884b1950413a3fe85688574638c3"
+    },
+    {
+      "path": "vendor/driver/inc/spi.h",
+      "bytes": 8828,
+      "sha256": "1a4c80fc8459808d0aab1422f0eb0f30093e966053acc960e321119815d37f61"
+    },
+    {
+      "path": "vendor/driver/inc/sysctrl.h",
+      "bytes": 22338,
+      "sha256": "93d58ce90ec19eeeaf2a9e29b8f4967bea5f9c98e7d8cd5998f05f7123f396c3"
+    },
+    {
+      "path": "vendor/driver/inc/timer3.h",
+      "bytes": 37054,
+      "sha256": "a738a4f5ca68a1dc7d584e8edefc87ec886321e991a9c95ffb50b754990ac514"
+    },
+    {
+      "path": "vendor/driver/inc/trim.h",
+      "bytes": 7502,
+      "sha256": "7c6604094497db508a59b087f35221113f9a4199bdf9fcd1e7f660a71b8ccaee"
+    },
+    {
+      "path": "vendor/driver/inc/trng.h",
+      "bytes": 4529,
+      "sha256": "8584cfbe538dd0ea3580c069983df01f4285c46d55377df621b9011bbe364306"
+    },
+    {
+      "path": "vendor/driver/inc/uart.h",
+      "bytes": 10347,
+      "sha256": "e1f53dcd864bb87d06ca6fcd9d070fac62af6f4e0c200984ad4c6b16fc39fea3"
+    },
+    {
+      "path": "vendor/driver/inc/vc.h",
+      "bytes": 14612,
+      "sha256": "fcc75b377e6491823a07b2d1f0864abd92e6bd4e5f36562d83926f84fbf1aaa9"
+    },
+    {
+      "path": "vendor/driver/inc/wdt.h",
+      "bytes": 5005,
+      "sha256": "78e1c6b566b5f3e6450c8901000d7c37109590b911b73b0a750c83257654cce0"
+    },
+    {
+      "path": "vendor/driver/src/adc.c",
+      "bytes": 15475,
+      "sha256": "9124d2a909d5806fc592dcc50ef3baf8d87792ea58902ac89fdb34a7c0fb95fa"
+    },
+    {
+      "path": "vendor/driver/src/adt.c",
+      "bytes": 52951,
+      "sha256": "474c12d1c31502e2a406a1d26846879befc10b7b9e8a8c4fa60a3bcd792da58e"
+    },
+    {
+      "path": "vendor/driver/src/aes.c",
+      "bytes": 6714,
+      "sha256": "152ae442776954af0de1802ae1ab6641a4bc1098d1a6aea3a806ef1a00a5cb36"
+    },
+    {
+      "path": "vendor/driver/src/bgr.c",
+      "bytes": 5724,
+      "sha256": "03e2fb033d9019dc49e5de25d84e52a0a79108638dacd05d9985e2f6bf85a5ef"
+    },
+    {
+      "path": "vendor/driver/src/bt.c",
+      "bytes": 50453,
+      "sha256": "fd78c04f6d2bdb9e8a544d2cc133a2b7bae9a79b6e7061065285e819eca9dc9b"
+    },
+    {
+      "path": "vendor/driver/src/crc.c",
+      "bytes": 16774,
+      "sha256": "618d2fa3f602c9691dbd7c516b4995684afb53cb299f6d7d7360447b39f2e51c"
+    },
+    {
+      "path": "vendor/driver/src/ddl.c",
+      "bytes": 9267,
+      "sha256": "a74e2e0843045022d05a27c9ab5faf3eae215e0a0c25c46c20428c7e2bc197a9"
+    },
+    {
+      "path": "vendor/driver/src/debug.c",
+      "bytes": 5243,
+      "sha256": "4bf48fec1c373250d6dc9c705ebb43d46426dbf177f30c207ee60179db746dfb"
+    },
+    {
+      "path": "vendor/driver/src/dmac.c",
+      "bytes": 23989,
+      "sha256": "76c98c445a71e469a3adc944cf5afc00b9d8f3786024d29c2125ecfefe0bb388"
+    },
+    {
+      "path": "vendor/driver/src/flash.c",
+      "bytes": 21494,
+      "sha256": "dd1af7ad24a2192870668ef38bb32081598d207bb2825a155d6f37811cf42455"
+    },
+    {
+      "path": "vendor/driver/src/gpio.c",
+      "bytes": 20141,
+      "sha256": "072b31d3ced9b6ab83c51adad49404b23d17008c7209396ae5ec15d5e03b715c"
+    },
+    {
+      "path": "vendor/driver/src/hdiv.c",
+      "bytes": 6328,
+      "sha256": "b0f6ac7a949dfd117c0061c1e0e00b7413c7d602ad57499578087b255a03eaf7"
+    },
+    {
+      "path": "vendor/driver/src/i2c.c",
+      "bytes": 8249,
+      "sha256": "24489edf31651d69d665237ba05b4a57a41ccda8f2e18e0c189348d384eff956"
+    },
+    {
+      "path": "vendor/driver/src/lcd.c",
+      "bytes": 10722,
+      "sha256": "2e0063ae64072465e6784358f7406d02da30cee55553091e6b60a0159eef5246"
+    },
+    {
+      "path": "vendor/driver/src/lpm.c",
+      "bytes": 5769,
+      "sha256": "c1dad6d65089a8c0be6a882e24f6fc81073d5ab3e1303998691232760fca5b61"
+    },
+    {
+      "path": "vendor/driver/src/lptim.c",
+      "bytes": 6947,
+      "sha256": "457986776022b037901449c4832bc2b4b3dd1f8d71e6a73fa7d6bc60e9bd3ab1"
+    },
+    {
+      "path": "vendor/driver/src/lpuart.c",
+      "bytes": 14717,
+      "sha256": "e6361a2c2d8acf9e67cb228d55088c74f6add529e0855225a4d0d5a30aeb8e67"
+    },
+    {
+      "path": "vendor/driver/src/lvd.c",
+      "bytes": 6650,
+      "sha256": "3b4afed32cd2b0f6e634a94a77773a2c22497c54b388cd05e08f435107ac1232"
+    },
+    {
+      "path": "vendor/driver/src/opa.c",
+      "bytes": 13355,
+      "sha256": "f7575204c1761cee9ef530891a07881a510c93bdbd196bcf6e8fed22942c1aa4"
+    },
+    {
+      "path": "vendor/driver/src/pca.c",
+      "bytes": 19702,
+      "sha256": "a64403967cb88fe1311ecde88ee6a2a2d46b7d153597cc9fe641f2cac54f9cba"
+    },
+    {
+      "path": "vendor/driver/src/pcnt.c",
+      "bytes": 10521,
+      "sha256": "4a645bbe75cdf91c9d5ce9dfd523a7e585319ed1bc87fc2b45d0816a7ddcf068"
+    },
+    {
+      "path": "vendor/driver/src/ram.c",
+      "bytes": 6090,
+      "sha256": "8cd056b2750377677b8ed2dfc25447fb042378cae8de23c3645d4452d256f5ae"
+    },
+    {
+      "path": "vendor/driver/src/reset.c",
+      "bytes": 6396,
+      "sha256": "68455fba2359cc6579d4641f23176cc88c726d0e7b0bab265d009042bdad1322"
+    },
+    {
+      "path": "vendor/driver/src/rtc.c",
+      "bytes": 17341,
+      "sha256": "9d2764b037a056eeb99b6c4227ea07e799ec382bcb4c8af88fb4c5508a6176f1"
+    },
+    {
+      "path": "vendor/driver/src/spi.c",
+      "bytes": 11369,
+      "sha256": "621177bce372a347a581a0c81293f3ad8ac644600161774fd461d396a39595d2"
+    },
+    {
+      "path": "vendor/driver/src/sysctrl.c",
+      "bytes": 25603,
+      "sha256": "766ac0718c1b24302dc6146dfb9ecf6f0e8e629de665c041c6afd6bcfdd1d383"
+    },
+    {
+      "path": "vendor/driver/src/timer3.c",
+      "bytes": 45059,
+      "sha256": "79f9bf68bf0ef1691adf6dd7d604c9f8e33c4ade06f573ccd93596b09cf1f4a3"
+    },
+    {
+      "path": "vendor/driver/src/trim.c",
+      "bytes": 8880,
+      "sha256": "5445bb6f076b88028de1732c1fe59e55d149718f1673ee95628b2873023a5849"
+    },
+    {
+      "path": "vendor/driver/src/trng.c",
+      "bytes": 7070,
+      "sha256": "d0f3277df32cdaaad7ce05b6a5d07f90f3d8e9746ab07ccd51896ab6f3632ec2"
+    },
+    {
+      "path": "vendor/driver/src/uart.c",
+      "bytes": 13835,
+      "sha256": "efc08789ae6e968d9d62db51929e47a8a6a93f46785f9cbb10725b61be9926ea"
+    },
+    {
+      "path": "vendor/driver/src/vc.c",
+      "bytes": 10241,
+      "sha256": "52d2554eb8cf834edd9549dad3b3af15fef75960ce1d2674312252dae0e35d14"
+    },
+    {
+      "path": "vendor/driver/src/wdt.c",
+      "bytes": 6505,
+      "sha256": "6b19bab03237ec2384ca2d92479a43941e1e7c08b753676cf0dbb324fd5720cc"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "build/HC32L130_Refactored.axf",
+      "bytes": 95440,
+      "sha256": "7c517ed910cc0e3ba1a8aad23ae398749bf3585cf8adb1b7c0af2cfc20920145"
+    },
+    {
+      "path": "build/HC32L130_Refactored.hex",
+      "bytes": 75066,
+      "sha256": "bace0fb0b0347a7407af12f44b86da25c33bd6e6f9118b202f4b24b94e1879b5"
+    },
+    {
+      "path": "build/HC32L130_Refactored.map",
+      "bytes": 173044,
+      "sha256": "02cea8ef074c4fd15396e956c1f66192e59b62b387487877991a5489fa24fa9e"
+    },
+    {
+      "path": "build/mdk/HC32L130_Refactored.axf",
+      "bytes": 379892,
+      "sha256": "ab0852ab9f0e4ef000794a0b61ea5d4f208a2846ecf7b3f25cd3072f19683e17"
+    },
+    {
+      "path": "build/mdk/HC32L130_Refactored.hex",
+      "bytes": 75066,
+      "sha256": "53f6bd696a242d31bf12989008a7b83a8c2b562e4235d2c4703cbeb32b89fae9"
+    },
+    {
+      "path": "build/build.log",
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "build/uv4_build.log",
+      "bytes": 1528,
+      "sha256": "2663d33d258a71a57a960762812b945c309b5e76041e37cadd1db2c6bf9a3c14"
+    },
+    {
+      "path": "build/tests/unicorn.log",
+      "bytes": 29,
+      "sha256": "b6af08b83cd9c59d6a4a2d24d1b165e2a6bc4c5d79bb01cba47e923994f6a69c"
+    }
+  ],
+  "commentVerification": {
+    "report": "docs/注释规范核验.md",
+    "evidence": "docs/注释规范核验.json",
+    "cHeaderFiles": 32,
+    "functionDefinitions": 158,
+    "publicInterfaces": 85,
+    "codeTokensUnchanged": true,
+    "hexUnchanged": true
+  }
+}
