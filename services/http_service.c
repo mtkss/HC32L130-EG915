@@ -1,36 +1,128 @@
 /**
  * @file http_service.c
- * @brief 通过AT实现共享的HTTP GET/POST传输阶段。
- * @details 只处理URL、正文和完整READ响应，不解释自检批准或周期参数。
- * @note 前台单实例；调用期间不得与其他网络/定位流程争用AT，取消HTTP仍需统一出口取消AT。
+ * @brief 依据EG800Z HTTP V1.4推进显式配置、URL、GET/POST和定长正文读取。
+ * @details 独占HTTP缓冲和AT步骤，不解释业务JSON；只接受有Content-Length的非空2xx正文。
+ * @note 单实例前台，失败/取消后必须由APP统一断电恢复，不能直接重试未知数据模式。
  */
 #include "http_service.h"
 #include "at_client.h"
 #include "project_config.h"
 #include <stdio.h>
 #include <string.h>
-/** @brief 前台单实例HTTP事务；URL/正文/响应均由本对象拥有，不借用业务缓冲。 */
+#include <stdlib.h>
+#include <ctype.h>
+/** @brief HTTP顺序阶段；配置受控后才允许URL和正文进入数据模式。 */
+typedef enum
+{
+    HTTP_CONFIG, ///< 显式绑定PDP1、自动请求头、仅响应体、关闭自动输出并选JSON。
+    HTTP_URL_PROMPT,
+    HTTP_URL_PAYLOAD, ///< CONNECT后才能发送精确URL。
+    HTTP_REQUEST,
+    HTTP_POST_PAYLOAD, ///< POST先等CONNECT，GET/POST均等结果URC。
+    HTTP_READ          ///< 按结果URC的长度读取，包间隔80秒不代表256字节。
+} HttpStage;
+/** @brief 前台事务和全部缓冲的唯一拥有者；start同步复制输入，不保存调用者指针。 */
 static struct
 {
-    unsigned stage;      ///< 阶段0设URL长度、1发URL、2发GET/POST、3发POST正文、4读响应。
-    bool is_post;        ///< body参数非NULL即POST；空字符串正文仍是POST。
-    Result result;       ///< 整体HTTP完成状态；PENDING期间不得覆盖请求。
-    CommandStep command; ///< 当前阶段AT步骤标志，与其他组件互斥。
-    char url[256];       ///< 复制的NUL终止URL，最大255字节，不含额外CRLF。
-    char body[PROJECT_HTTP_CAPACITY]; ///< 复制的NUL终止POST正文；发送长度为strlen，不包含NUL。
-    char
-        response[PROJECT_AT_RESPONSE_CAPACITY]; ///< HTTP成功后保存AT READ文本，业务解释层只读借用。
+    HttpStage stage;
+    unsigned config_index; ///< 配置数组索引，失败立即结束而非带旧配置继续。
+    bool is_post;
+    Result result;
+    CommandStep command;
+    size_t body_length;                          ///< 服务器声明正文长度，成功解析URC后才有效。
+    char url[256];                               ///< 最多255字节URL加NUL，本模块按值持有。
+    char body[PROJECT_HTTP_CAPACITY];            ///< POST正文最多511字节加NUL；不包含自动请求头。
+    char response[PROJECT_AT_RESPONSE_CAPACITY]; ///< 只保存正文，不向业务暴露AT控制行。
 } http;
-/** @brief 复制URL和可选POST正文，再建立共用HTTP阶段；参数失败不启动传输。 */
+/** @brief 从完整结果行读取无符号十进制字段，拒绝符号、溢出和非数字前缀。 */
+static bool read_unsigned(const char **cursor, unsigned long *value)
+{
+    const char *p = *cursor;
+    unsigned long parsed = 0;
+    while (*p == ' ')
+    {
+        p++;
+    }
+    if (!isdigit((unsigned char)*p))
+    {
+        return false;
+    }
+    while (isdigit((unsigned char)*p))
+    {
+        unsigned digit = (unsigned)(*p++ - '0');
+        if (parsed > (UINT32_MAX - digit) / 10ul)
+        {
+            return false;
+        }
+        parsed = parsed * 10ul + digit;
+    }
+    while (*p == ' ')
+    {
+        p++;
+    }
+    *cursor = p;
+    *value = parsed;
+    return true;
+}
+/** @brief 校验结果URC；缺长度/空正文不猜测帧界，错误HTTP代码不进入业务解析。 */
+static Result accept_result(const char *prefix)
+{
+    const char *p = strstr(at_response(), prefix);
+    unsigned long result, code, length;
+    if (!p)
+    {
+        return RESULT_FORMAT;
+    }
+    p += strlen(prefix);
+    if (!read_unsigned(&p, &result))
+    {
+        return RESULT_FORMAT;
+    }
+    if (result != 0)
+    {
+        return RESULT_IO;
+    }
+    if (*p++ != ',' || !read_unsigned(&p, &code))
+    {
+        return RESULT_FORMAT;
+    }
+    if (code < 200 || code > 299)
+    {
+        return RESULT_REJECTED;
+    }
+    if (*p++ != ',' || !read_unsigned(&p, &length) || (*p != '\r' && *p != '\n'))
+    {
+        return RESULT_FORMAT;
+    }
+    if (!length)
+    {
+        return RESULT_FORMAT;
+    }
+    if (length > PROJECT_AT_RESPONSE_CAPACITY - 96u)
+    {
+        return RESULT_OVERFLOW;
+    }
+    http.body_length = (size_t)length;
+    return RESULT_OK;
+}
+/** @brief 验证并复制请求，再开启单实例HTTP流程。 */
 Result http_start(const char *url, const char *body)
 {
     if (http.result == RESULT_PENDING)
     {
         return RESULT_BUSY;
     }
-    if (!url || strlen(url) >= sizeof(http.url) || (body && strlen(body) >= sizeof(http.body)))
+    if (!url || (strncmp(url, "http://", 7) && strncmp(url, "https://", 8)))
+    {
+        return RESULT_INVALID;
+    }
+    if (strlen(url) >= sizeof(http.url) || (body && strlen(body) >= sizeof(http.body)))
     {
         return RESULT_OVERFLOW;
+    }
+    if (body && !*body)
+    {
+        return RESULT_INVALID; /* 手册POST最短1字节。 */
     }
     strcpy(http.url, url);
     http.body[0] = 0;
@@ -39,15 +131,22 @@ Result http_start(const char *url, const char *body)
         strcpy(http.body, body);
     }
     http.is_post = body != NULL;
-    http.stage = 0;
+    http.stage = HTTP_CONFIG;
+    http.config_index = 0;
     http.command.is_waiting = false;
     http.result = RESULT_PENDING;
     http.response[0] = 0;
+    http.body_length = 0;
     return RESULT_OK;
 }
-/** @brief 依次推进URL提交、HTTP请求、正文与读取，不解释业务JSON。 */
+/** @brief 每轮只提交/查询当前阶段，正文和完成URC分别校验后才发布成功。 */
 void http_poll(void)
 {
+    /* HTTP V1.4 §2.3.1：不能依赖模块此前持有的请求头/自动输出配置。 */
+    static const char *const configuration[] = {
+        "AT+QHTTPCFG=\"contextid\",1", "AT+QHTTPCFG=\"requestheader\",0",
+        "AT+QHTTPCFG=\"responseheader\",0", "AT+QHTTPCFG=\"rspout/auto\",0",
+        "AT+QHTTPCFG=\"contenttype\",4"};
     Result result = RESULT_PENDING;
     char command[64];
     if (http.result != RESULT_PENDING)
@@ -56,51 +155,82 @@ void http_poll(void)
     }
     switch (http.stage)
     {
-    /* 阶段0仅宣告URL长度；收到CONNECT后才允许提交精确URL。 */
-    case 0:
+    case HTTP_CONFIG:
+        result = at_command_step(&http.command, configuration[http.config_index], "OK",
+                                 PROJECT_COMMAND_TIMEOUT_MS);
+        if (result == RESULT_OK)
+        {
+            if (++http.config_index == sizeof(configuration) / sizeof(configuration[0]))
+            {
+                http.stage = HTTP_URL_PROMPT;
+            }
+            return;
+        }
+        break;
+    case HTTP_URL_PROMPT:
         snprintf(command, sizeof(command), "AT+QHTTPURL=%u,80", (unsigned)strlen(http.url));
         result = at_command_step(&http.command, command, "CONNECT", PROJECT_HTTP_TIMEOUT_MS);
         break;
-    /* URL不是AT命令，payload_step不追加CRLF，避免宣告长度与实际串流不符。 */
-    case 1:
+    case HTTP_URL_PAYLOAD:
         result = at_payload_step(&http.command, http.url, strlen(http.url), "OK",
                                  PROJECT_COMMAND_TIMEOUT_MS);
         break;
-    /* GET在本阶段等HTTP结果，POST先等数据输入提示；两条路径之后汇合到READ。 */
-    case 2:
+    case HTTP_REQUEST:
         if (http.is_post)
         {
-            snprintf(command, sizeof(command), "AT+QHTTPPOST=%u,60,20",
+            snprintf(command, sizeof(command), "AT+QHTTPPOST=%u,60,80",
                      (unsigned)strlen(http.body));
         }
         else
         {
             strcpy(command, "AT+QHTTPGET=80");
         }
-        result =
-            at_command_step(&http.command, command, http.is_post ? "CONNECT" : "+QHTTPGET: 0,200",
-                            PROJECT_HTTP_TIMEOUT_MS);
-        break;
-    /* POST以模块已报告0,200为上传阶段成功；GET无正文，显式空步骤保持共用阶段编号。 */
-    case 3:
-        if (http.is_post)
+        result = at_command_step(&http.command, command, http.is_post ? "CONNECT" : "+QHTTPGET:",
+                                 http.is_post ? PROJECT_HTTP_CONNECT_TIMEOUT_MS
+                                              : PROJECT_HTTP_TIMEOUT_MS);
+        if (result == RESULT_OK && !http.is_post)
         {
-            result = at_payload_step(&http.command, http.body, strlen(http.body),
-                                     "+QHTTPPOST: 0,200", PROJECT_HTTP_TIMEOUT_MS);
-        }
-        else
-        {
-            result = RESULT_OK;
+            result = accept_result("+QHTTPGET:");
+            if (result == RESULT_OK)
+            {
+                http.stage = HTTP_READ;
+                return;
+            }
         }
         break;
-    /* 等完整读取终结行后保存响应副本；这里不将缺少配置字段当作传输失败。 */
-    case 4:
-        result = at_command_step(&http.command, "AT+QHTTPREAD=256", "+QHTTPREAD: 0",
-                                 PROJECT_HTTP_TIMEOUT_MS);
+    case HTTP_POST_PAYLOAD:
+        result = at_payload_step(&http.command, http.body, strlen(http.body),
+                                 "+QHTTPPOST:", PROJECT_HTTP_TIMEOUT_MS);
         if (result == RESULT_OK)
         {
-            strcpy(http.response, at_response());
-            http.result = RESULT_OK;
+            result = accept_result("+QHTTPPOST:");
+        }
+        break;
+    case HTTP_READ:
+        result = at_http_read_step(&http.command, http.body_length, PROJECT_HTTP_TIMEOUT_MS);
+        if (result == RESULT_OK)
+        {
+            const char *p = at_response();
+            /* 只接受独立CONNECT行，避免URC文本中的同名子串改变正文起点。 */
+            if (strncmp(p, "CONNECT\r\n", 9))
+            {
+                p = strstr(p, "\nCONNECT\r\n");
+                if (p)
+                {
+                    p++;
+                }
+            }
+            if (!p || strlen(p + 9) < http.body_length || memchr(p + 9, 0, http.body_length))
+            {
+                result = RESULT_FORMAT;
+            }
+            else
+            {
+                memcpy(http.response, p + 9, http.body_length);
+                http.response[http.body_length] = 0;
+                http.result = RESULT_OK;
+                return;
+            }
         }
         break;
     default:
@@ -109,7 +239,7 @@ void http_poll(void)
     }
     if (result == RESULT_OK)
     {
-        http.stage++;
+        http.stage = (HttpStage)(http.stage + 1);
     }
     else if (result != RESULT_PENDING)
     {
@@ -117,18 +247,17 @@ void http_poll(void)
         at_cancel();
     }
 }
-/** @brief 查询HTTP传输结果，业务批准和配置更新另由report解析。 */
+/** @brief 查询传输终态，OK仍不代表服务器业务批准。 */
 Result http_result(void)
 {
     return http.result;
 }
-/** @brief 返回HTTP内部保存的完整AT读取文本，由调用者立即解释。 */
+/** @brief 借用已成功接收的正文，下一次start前有效。 */
 const char *http_response(void)
 {
     return http.response;
 }
-
-/** @brief 清除HTTP等待资格，允许下一次start；在途AT须由统一出口另行取消。 */
+/** @brief 取消软件等待；模块数据模式可能仍在途，调用方须统一断电后再发AT。 */
 void http_cancel(void)
 {
     http.result = RESULT_IO;

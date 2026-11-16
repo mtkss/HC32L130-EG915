@@ -29,8 +29,8 @@ void at_poll(void);
  * @param text 发送源；非NULL，调用者保证至少length字节可读。
  * @param length 精确发送字节数；raw=false时实现另加CRLF，不计入此长度。
  * @param raw true发送原始载荷；false发送AT命令并追加CRLF。
- * @param expected 非NULL、非空、长度小于64的行前缀；非空由调用者保证。
- * @param timeout_ms 响应期限，1..120000毫秒，使用board单调时基。
+ * @param expected 非NULL、非空、长度小于64的行前缀；空串返回INVALID。
+ * @param timeout_ms 响应期限，1..240000毫秒，使用board单调时基。
  * @return OK表示已发出并进入异步等待；BUSY不接受新事务；其他错误可能已有部分字节发出。
  * @note 仅前台、不可重入；发送为有界轮询，等待为poll驱动；start不保留text指针。
  * @note 完成须查询at_result；响应借用到下一次有效start/init，错误/取消后的部分文本不得作成功使用。
@@ -58,7 +58,7 @@ void at_cancel(void);
  * @param step 当前组件独占、初始is_waiting=false的步骤对象，非NULL。
  * @param command 非NULL NUL终止AT命令，首次提交同步发送。
  * @param expected 非NULL非空期望前缀，长度小于64，约束同at_start。
- * @param timeout_ms 1..120000毫秒；只在首次成功提交时绑定该事务。
+ * @param timeout_ms 1..240000毫秒；只在首次成功提交时绑定该事务。
  * @return PENDING表示步骤正在提交/等待（也可能AT暂忙）；终态会清step等待标志。
  * @note 同一step必须串行推进同一命令；不可在is_waiting时换参数冒充另一个事务。
  */
@@ -71,8 +71,17 @@ Result at_command_step(CommandStep *step, const char *command, const char *expec
  * @param count 精确载荷字节数，不包含NUL，不自动追加CRLF。
  * @param expected 非空期望行前缀，长度小于64；约束同at_start。
  * @return PENDING表示等待提交/完成；终态会清等待标志，精确字节不追加CRLF。
- * @param timeout_ms 响应期限1..120000毫秒，仅首次提交绑定。
+ * @param timeout_ms 响应期限1..240000毫秒，仅首次提交绑定。
  */
 Result at_payload_step(CommandStep *step, const char *bytes, size_t count, const char *expected,
                        uint32_t timeout_ms);
+/**
+ * @brief 按已知正文长度读取HTTP结果；正文不参与ERROR/成功行匹配。
+ * @param step 前台独占步骤，初始is_waiting=false。
+ * @param body_length GET/POST结果URC给出的正文长度，1..响应容量减96字节；当前不支持未知长度响应。
+ * @param timeout_ms 主机总等待预算，1..240000毫秒；READ参数80是包间隔秒数。
+ * @return PENDING为在途；OK须完整正文、尾部OK及QHTTPREAD: 0均到达。超长/取消需关机恢复。
+ * @note 与其他AT拥有者互斥；响应借用规则同at_response，不支持二进制正文的上层JSON解释。
+ */
+Result at_http_read_step(CommandStep *step, size_t body_length, uint32_t timeout_ms);
 #endif

@@ -17,7 +17,9 @@ static struct
         quarantine_last_byte_ms; ///< 单调毫秒：事务起点/最近字节、响应预算、排空起点/排空最近字节。
     bool is_quarantined;         ///< 取消/失败后的隔离窗，期间新start返回BUSY。
     size_t count, line_start;    ///< response已用字节数（不含NUL）与当前未处理行的起始偏移。
-    char expected[64];           ///< 按值保存的非空期望前缀，最多63字符加NUL。
+    bool is_http_read, has_connect, has_read_ok; ///< 固定长度READ模式；只有正文外才解释结果行。
+    size_t http_remaining; ///< 已知HTTP正文还需接收的字节数，不含CONNECT和结束行。
+    char expected[64];     ///< 按值保存的非空期望前缀，最多63字符加NUL。
     char response
         [PROJECT_AT_RESPONSE_CAPACITY]; ///< 累计响应含NUL；保留多行，满时失败，不覆盖历史拼出伪帧。
 } client;
@@ -44,7 +46,7 @@ Result at_start(const char *text, size_t length, bool raw, const char *expected,
                 uint32_t timeout_ms)
 {
     Result result;
-    if (!text || !expected || !timeout_ms || timeout_ms > 120000u ||
+    if (!text || !expected || !*expected || !timeout_ms || timeout_ms > PROJECT_AT_MAX_TIMEOUT_MS ||
         strlen(expected) >= sizeof(client.expected))
     {
         return RESULT_INVALID;
@@ -58,6 +60,7 @@ Result at_start(const char *text, size_t length, bool raw, const char *expected,
     memset(client.response, 0, sizeof(client.response));
     client.count = client.line_start = 0;
     client.has_match = false;
+    client.is_http_read = client.has_connect = client.has_read_ok = false;
     strcpy(client.expected, expected);
     client.started_ms = client.last_byte_ms = board_now_ms();
     client.timeout_ms = timeout_ms;
@@ -116,6 +119,16 @@ void at_poll(void)
         client.response[client.count++] = byte;
         client.response[client.count] = 0;
         client.last_byte_ms = now;
+        /* HTTP手册§2.3.9：CONNECT后按结果URC给出的字节数读取；正文中的ERROR/OK不是AT结果。 */
+        if (client.is_http_read && client.has_connect && client.http_remaining)
+        {
+            client.http_remaining--;
+            if (!client.http_remaining)
+            {
+                client.line_start = client.count;
+            }
+            continue;
+        }
         if (byte != '\n')
         {
             continue;
@@ -126,12 +139,43 @@ void at_poll(void)
             line++;
         }
         length = strcspn(line, "\r\n");
+        if (client.is_http_read && !client.has_connect && length == 7 &&
+            !strncmp(line, "CONNECT", 7))
+        {
+            client.has_connect = true;
+            client.line_start = client.count;
+            continue;
+        }
+        if (client.is_http_read && client.has_connect && length == 2 && !strncmp(line, "OK", 2))
+        {
+            client.has_read_ok = true;
+        }
         /* ERROR及CME/CMS错误须先于期望成功前缀处理，避免错误行包含关键字而误成功。 */
         if ((length == 5 && !strncmp(line, "ERROR", 5)) || !strncmp(line, "+CME ERROR:", 11) ||
             !strncmp(line, "+CMS ERROR:", 11))
         {
             finish(RESULT_IO);
             return;
+        }
+        /* READ非零结果是明确失败；不等满主机超时，也不把前缀0,额外字段当作成功。 */
+        if (client.is_http_read && client.has_connect && !client.http_remaining &&
+            !strncmp(line, "+QHTTPREAD:", 11))
+        {
+            const char *code = line + 11;
+            while (*code == ' ')
+            {
+                code++;
+            }
+            if (code[0] != '0' || (code[1] != '\r' && code[1] != '\n'))
+            {
+                finish(RESULT_IO);
+                return;
+            }
+            if (!client.has_read_ok)
+            {
+                finish(RESULT_FORMAT);
+                return;
+            }
         }
         /* 除以冒号结束的字段前缀外，成功关键字后必须是行界或分隔符；OKAY不等于OK。 */
         if (!strncmp(line, client.expected, strlen(client.expected)))
@@ -141,7 +185,9 @@ void at_poll(void)
                  line[strlen(client.expected)] == '\r' || line[strlen(client.expected)] == '\n' ||
                  line[strlen(client.expected)] == ',' || line[strlen(client.expected)] == ' '))
             {
-                client.has_match = true;
+                client.has_match =
+                    !client.is_http_read ||
+                    (client.has_connect && client.has_read_ok && !client.http_remaining);
             }
         }
         client.line_start = client.count;
@@ -182,7 +228,7 @@ void at_cancel(void)
  * @param length 精确发送字节数，首次调用同步消费，不含自动CRLF。
  * @param raw true精确载荷，false追加命令CRLF。
  * @param expected 非NULL非空期望前缀，长度小于64。
- * @param timeout 响应期限，毫秒，1..120000。
+ * @param timeout 响应期限，毫秒，1..240000。
  * @return 暂忙或在途为PENDING；终态清is_waiting后返回原AT结果。
  * @note 同一step在等待期间不得切换命令身份，也不能据PENDING判断模块已接受。
  */
@@ -228,4 +274,24 @@ Result at_payload_step(CommandStep *step, const char *bytes, size_t count, const
                        uint32_t timeout)
 {
     return execute_step(step, bytes, count, true, expected, timeout);
+}
+
+/** @brief 用同一AT拥有者提交固定长度HTTP读取，保持正文和控制行边界。 */
+Result at_http_read_step(CommandStep *step, size_t body_length, uint32_t timeout_ms)
+{
+    bool was_waiting;
+    Result result;
+    if (!step || !body_length || body_length > PROJECT_AT_RESPONSE_CAPACITY - 96u)
+    {
+        return RESULT_INVALID;
+    }
+    was_waiting = step->is_waiting;
+    result = execute_step(step, "AT+QHTTPREAD=80", strlen("AT+QHTTPREAD=80"), false,
+                          "+QHTTPREAD: 0", timeout_ms);
+    if (!was_waiting && step->is_waiting)
+    {
+        client.is_http_read = true;
+        client.http_remaining = body_length;
+    }
+    return result;
 }

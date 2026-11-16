@@ -26,8 +26,8 @@
     ],
     "config": []
   },
-  "missingIncludes": [],
   "exportedMutableExterns": [],
-  "undocumentedHeaderFunctions": [],
-  "cycles": []
+  "cycles": [],
+  "publicFunctionContractProblems": [],
+  "reviewedBuild": "既有C文件内增加实现；ARMCC显式源码清单和MDK目标均已构建"
 }

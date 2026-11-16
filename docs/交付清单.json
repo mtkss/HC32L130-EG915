@@ -7,10 +7,10 @@
     "armccErrors": 0,
     "mdkErrors": 0,
     "mdkWarnings": 2,
-    "testChecks": 123,
+    "testChecks": 174,
     "testFailures": 0,
-    "romBytes": 26672,
-    "ramBytes": 7416,
+    "romBytes": 27568,
+    "ramBytes": 7440,
     "stackBytes": 2048,
     "flashCodeLimit": "0xEE00",
     "hardwareTested": false,
@@ -39,18 +39,18 @@
     },
     {
       "path": "MDK/HC32L130_Refactored.uvprojx",
-      "bytes": 17511,
-      "sha256": "496d55ec75c2425ddbc402fdeb2c315b2aed9c3ba308c90c5aa67eceb5a0fb52"
+      "bytes": 19710,
+      "sha256": "3c2282240044b7724b077fcfc8ecc46cd1542c94ca985ab1dbddf605b1a136bd"
     },
     {
       "path": "README.md",
-      "bytes": 2708,
-      "sha256": "5ad6c6f03230bd2becbc191f4584e3648e12758b053edbe91b1eb6e859ffc041"
+      "bytes": 2992,
+      "sha256": "5bfdfb0f08d5d4cc8e61e8469f1ea85e370733f32de00f57266b82617f6dbe69"
     },
     {
       "path": "app/application.c",
-      "bytes": 17970,
-      "sha256": "db184125b8a5d8ad35fc734af2472c7aa4113d74a4043864480351d7f7df77c9"
+      "bytes": 18333,
+      "sha256": "57636c926335b5a744a337430f850280b56e283e7d68e99995a78424d04c9f5a"
     },
     {
       "path": "app/application.h",
@@ -89,23 +89,23 @@
     },
     {
       "path": "components/location_manager.c",
-      "bytes": 11795,
-      "sha256": "496dbaee1f1d21c3e55c7373e6a89cfbf9ba5989413575709a4361f2e21af74f"
+      "bytes": 9891,
+      "sha256": "ecb4c2242516d90a8373b5af1a77fe9c4dfd489e0df6b05683ba8716601b3115"
     },
     {
       "path": "components/location_manager.h",
-      "bytes": 2306,
-      "sha256": "de38b037ebc37b6c408bddfe93e1c982ba4d4956c8a95c05c23a0574a655a557"
+      "bytes": 2375,
+      "sha256": "87719a6f0b734007e84ffe5c7023d1daefbfa5f0dacf100fc6bf72f07fcba9d8"
     },
     {
       "path": "components/network_manager.c",
-      "bytes": 17092,
-      "sha256": "36fd6cda4114c07cdaeba839765c85029fca78ad4f18e6fdab87133bea7719fe"
+      "bytes": 16622,
+      "sha256": "e26897ff1a3ce9e38ba874e49caf4f986c6242f8dc2328285923349a0fb6db2f"
     },
     {
       "path": "components/network_manager.h",
-      "bytes": 2793,
-      "sha256": "ad38441a5c8bb8f8a2d525bca2cb5ebf78a557a047606960a38e79d389007308"
+      "bytes": 2927,
+      "sha256": "97854900b28dd6979509caf07ac2962d634486ef19f73b1edd29191147ce40d5"
     },
     {
       "path": "components/sampling_service.c",
@@ -129,8 +129,8 @@
     },
     {
       "path": "config/project_config.h",
-      "bytes": 4168,
-      "sha256": "ecd8c7ed7af37c1d68f3e27d1ac3475842217ee27fdb697961c63f36aae5ae23"
+      "bytes": 4651,
+      "sha256": "42680a0c4e68fb09c3b54c26d32a3dd76dd5b51c7d329742cba77bba49dc8cb8"
     },
     {
       "path": "core/domain.h",
@@ -148,6 +148,26 @@
       "sha256": "3461d425cb2694939884e8e65c610b0ac983c7f3783f25c4d5dde6257f025f9b"
     },
     {
+      "path": "docs/EG800ZEU_注释核验.json",
+      "bytes": 39678,
+      "sha256": "0d84aaa61f013de3f7ac8cbff50f27dd383e5d7fe78a0b0d082ca3c531867dd9"
+    },
+    {
+      "path": "docs/EG800ZEU_适配说明.md",
+      "bytes": 7749,
+      "sha256": "e9b9e2f80ce11fdff2d77b231bf216ad5538b772d11b54206e1a3289875c24d3"
+    },
+    {
+      "path": "docs/EG800ZEU_附件证据.json",
+      "bytes": 1012,
+      "sha256": "4e981060716cf52a19ac010cb2c5ce197f38a0a5e9b76fdc04656441d4159e6a"
+    },
+    {
+      "path": "docs/EG800ZEU_验证记录.md",
+      "bytes": 3545,
+      "sha256": "cb57b5700c90c5e91f052007751eb011dade41f8123de0b18e420abef4cab4f9"
+    },
+    {
       "path": "docs/新工程运行说明.md",
       "bytes": 4502,
       "sha256": "b9515b6922e760d2f937c5f63120592b0f332bd721592ec62df99d55ae5343bd"
@@ -159,18 +179,18 @@
     },
     {
       "path": "docs/模块边界核验.json",
-      "bytes": 508,
-      "sha256": "bcd82459ad18a26a082dcc8501574e1b0b0e0764a75106790f61d7bc1a430789"
+      "bytes": 588,
+      "sha256": "e01458d61cfb007497de2817f7b4406aa1ae46fc8b89f8ecfcfe6cc7e414793c"
     },
     {
       "path": "docs/注释规范核验.json",
-      "bytes": 54977,
-      "sha256": "559b5b44d314d105fc9ef95c03e81ebf907bc80dafdb22a5951e4882fd58f385"
+      "bytes": 55110,
+      "sha256": "a1a742ecbd65fbbe50667a76ff1f4011527f1d22b00797d7bbea3d9925b6f816"
     },
     {
       "path": "docs/注释规范核验.md",
-      "bytes": 3148,
-      "sha256": "c5256874a04fb4d5beb29dd7fef38af0a5a8684562f0c1d1bd8a57f04c7292eb"
+      "bytes": 3355,
+      "sha256": "7bd4c8c8513c01d1400030a6bed6e4519d95a199b430e72cd19fba0dcf606711"
     },
     {
       "path": "docs/源工程只读核验.json",
@@ -184,8 +204,8 @@
     },
     {
       "path": "docs/验证记录.md",
-      "bytes": 4095,
-      "sha256": "c77a33e3042b3f345617bb54e05a7d0a164be30df00cff56ad364e570dddb3fc"
+      "bytes": 4262,
+      "sha256": "a9bd56b658295d73d0dbf743473e389ac16fefa5445beb2cecbb3b4b8444adc1"
     },
     {
       "path": "platform/board.c",
@@ -214,23 +234,23 @@
     },
     {
       "path": "services/at_client.c",
-      "bytes": 8846,
-      "sha256": "3bf8c43f89e66cfddef647c68afed8edf49514993fcdabaeb1e0ff5c108b9bf8"
+      "bytes": 11459,
+      "sha256": "70df7f83b9d610e2914652a58d6e9e3303dfc1ab81ed78d9998f2465746ac67c"
     },
     {
       "path": "services/at_client.h",
-      "bytes": 4599,
-      "sha256": "7538cfd2310bf0c57a9640124ae059d228ec984f771f040ff38b163fc342a7c7"
+      "bytes": 5303,
+      "sha256": "c1b07d40500fb06e78d062309ef9769280e8a88f0e72c8b732e24a711bb1698d"
     },
     {
       "path": "services/http_service.c",
-      "bytes": 4886,
-      "sha256": "616bd0707df2e4b5065f1756500534168b2c955dd5251f32ba2757d6bb08c9f9"
+      "bytes": 8535,
+      "sha256": "3e6d1e6d4eb7c144a227c61917c8ac6195b97072f545968f2b6e45c3f99c4bb9"
     },
     {
       "path": "services/http_service.h",
-      "bytes": 1881,
-      "sha256": "043210e4e7029af094be3d8d5b84fe00c5f592e56fde2b9d9f3fad6616d2cf4b"
+      "bytes": 2188,
+      "sha256": "61633c1b475d9632b737265961a4927531aea4165767713f1eb270d744e1e433"
     },
     {
       "path": "services/identity_store.c",
@@ -244,13 +264,13 @@
     },
     {
       "path": "services/protocol_codec.c",
-      "bytes": 16826,
-      "sha256": "4cecb8425f5fcd37c127d385c0a991a7b07dd023a026a39de30ca5b4924ddca1"
+      "bytes": 17325,
+      "sha256": "522df22da097f26a0449231dde058dfab18fe71a2f697c3f75dfbebfd9a72639"
     },
     {
       "path": "services/protocol_codec.h",
-      "bytes": 6144,
-      "sha256": "f1a460029ec42c129748873751b4e1a465d01633b8e666278af1d6ae8ee77f73"
+      "bytes": 6305,
+      "sha256": "dad60c83aa0db3b3fd8530ab7da25dac1b990a20e567eb15e26d9068fd30511d"
     },
     {
       "path": "services/record_cache.c",
@@ -289,8 +309,8 @@
     },
     {
       "path": "tests/test_firmware.c",
-      "bytes": 24057,
-      "sha256": "eb5b0673bd751904bf7f86ff1b1a01c27092a4528bf9b6db7da22c7666146361"
+      "bytes": 31496,
+      "sha256": "24aa3affd3cceb483094e3e796ebd71a2a897a0f4ad4e78cb901b5f81005d2a1"
     },
     {
       "path": "tools/build.ps1",
@@ -304,8 +324,8 @@
     },
     {
       "path": "tools/package_project.py",
-      "bytes": 1342,
-      "sha256": "370f0aa7400b9895162f940b832b49b5ffb0e95f7ccb6d34c1e4293dd2200c41"
+      "bytes": 1797,
+      "sha256": "8f81b016ca9642fa3cfee3fb426a19cb3101450516731d00caa2109fd8b399fa"
     },
     {
       "path": "tools/run_arm_tests.py",
@@ -811,28 +831,28 @@
   "artifacts": [
     {
       "path": "build/HC32L130_Refactored.axf",
-      "bytes": 95440,
-      "sha256": "7c517ed910cc0e3ba1a8aad23ae398749bf3585cf8adb1b7c0af2cfc20920145"
+      "bytes": 96672,
+      "sha256": "46a0cc33acb592ff11a3f3a6957d7ef0c5b15d0ff11d1a7e18fe4279a114911a"
     },
     {
       "path": "build/HC32L130_Refactored.hex",
-      "bytes": 75066,
-      "sha256": "bace0fb0b0347a7407af12f44b86da25c33bd6e6f9118b202f4b24b94e1879b5"
+      "bytes": 77586,
+      "sha256": "6069a0fa917a3824b1e854159a71c8898412cc076d2492c055cbfeca657cc168"
     },
     {
       "path": "build/HC32L130_Refactored.map",
-      "bytes": 173044,
-      "sha256": "02cea8ef074c4fd15396e956c1f66192e59b62b387487877991a5489fa24fa9e"
+      "bytes": 175665,
+      "sha256": "828e5dd1ea2f7536670033f94089c96621ef9dc8c79bffaef7abd233dbdfb5c0"
     },
     {
       "path": "build/mdk/HC32L130_Refactored.axf",
-      "bytes": 379892,
-      "sha256": "ab0852ab9f0e4ef000794a0b61ea5d4f208a2846ecf7b3f25cd3072f19683e17"
+      "bytes": 383600,
+      "sha256": "4cc05235e7f171c60e02ad061d0ed2b229e428bf423539daf3b6aa54a7c7c364"
     },
     {
       "path": "build/mdk/HC32L130_Refactored.hex",
-      "bytes": 75066,
-      "sha256": "53f6bd696a242d31bf12989008a7b83a8c2b562e4235d2c4703cbeb32b89fae9"
+      "bytes": 77586,
+      "sha256": "d780aab9dcea2bd7cb2d081c466a5fd4dadf3b0b5097e641553681364a2bdd49"
     },
     {
       "path": "build/build.log",
@@ -842,21 +862,22 @@
     {
       "path": "build/uv4_build.log",
       "bytes": 1528,
-      "sha256": "2663d33d258a71a57a960762812b945c309b5e76041e37cadd1db2c6bf9a3c14"
+      "sha256": "d08c19d38cfe575ebf2085fecef1d5ad097b21ace32320bd57bcac2e050559b5"
     },
     {
       "path": "build/tests/unicorn.log",
       "bytes": 29,
-      "sha256": "b6af08b83cd9c59d6a4a2d24d1b165e2a6bc4c5d79bb01cba47e923994f6a69c"
+      "sha256": "1d031ce6451089de44f03aa310df6091a80d8189ccdea6c32a78d87f661cc210"
     }
   ],
   "commentVerification": {
-    "report": "docs/注释规范核验.md",
-    "evidence": "docs/注释规范核验.json",
+    "report": "docs/EG800ZEU_验证记录.md",
+    "evidence": "docs/EG800ZEU_注释核验.json",
     "cHeaderFiles": 32,
-    "functionDefinitions": 158,
-    "publicInterfaces": 85,
-    "codeTokensUnchanged": true,
-    "hexUnchanged": true
-  }
+    "functionDefinitions": 167,
+    "publicInterfaces": 86,
+    "intentionalBehaviorChange": true
+  },
+  "branch": "feature/eg800z-eu-gnss",
+  "baseCommit": "d54f2f1c4df5ed055262f1b03c210d904f4c9913"
 }

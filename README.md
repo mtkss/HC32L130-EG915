@@ -1,4 +1,6 @@
-# HC32L130 独立重构工程
+# HC32L130 + EG800Z-EU（带GNSS）适配分支
+
+当前分支：`feature/eg800z-eu-gnss`。APN与板级接线沿用用户确认，先读[适配说明](docs/EG800ZEU_适配说明.md)及[分支验证记录](docs/EG800ZEU_验证记录.md)。`main`保留原EG915基线；以下工程目录/构建方法继续有效。
 
 这是由D:\download\hc32l130f8ua_template复制基础依赖后重构的独立项目。源目录未修改，原业务文件保存在baseline，不参与新工程编译。
 

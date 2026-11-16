@@ -15,15 +15,13 @@
 /** @brief 网络步骤与设备电源阶段；数字不对应外部协议。 */
 typedef enum
 {
-    NET_SUPPLY,     ///< 供电高后等待1s，保证原上电顺序。
-    NET_KEY_HIGH,   ///< PWRKEY高至少100ms后开始低脉冲。
-    NET_KEY_LOW,    ///< 低至少2500ms后拉高并开始AT探测。
-    NET_AT_READY,   ///< 最多60次ATE0探测，失败间隔100ms。
-    NET_SIM_READY,  ///< 最多150次CPIN READY探测，失败不伪造SIM就绪。
-    NET_APN,        ///< 尝试原APN配置，失败仍继续国家/网络判断。
-    NET_DEREGISTER, ///< 先停止自动注册，成功后才做Tele2首试。
-    NET_TELE2,
-    NET_COUNTRY,       ///< QENG确定MCC，缺新结果时保留RAM历史判断。
+    NET_SUPPLY,        ///< 供电高后等待1s，保证原上电顺序。
+    NET_KEY_HIGH,      ///< PWRKEY高至少100ms后开始低脉冲。
+    NET_KEY_LOW,       ///< 低至少2500ms后拉高并开始AT探测。
+    NET_AT_READY,      ///< 最多60次ATE0探测，失败间隔100ms。
+    NET_SIM_READY,     ///< 最多150次CPIN READY探测，失败不伪造SIM就绪。
+    NET_APN,           ///< 尝试原APN配置，失败仍继续国家/网络判断。
+    NET_COUNTRY,       ///< 自动附着后QENG确定MCC，250才沿用俄罗斯业务策略。
     NET_AUTO,          ///< 恢复自动选网，随后再有限等待附着。
     NET_AUTO_WAIT,     ///< 最多60s附着窗口，不把恢复COPS的OK等同数据已就绪。
     NET_AUTO_ACTIVATE, ///< 尝试激活PDP，并更新本轮data_ready。
@@ -35,7 +33,6 @@ typedef enum
     NET_ICCID,         ///< 查询当前SIM标识；失败仍继续其他元数据。
     NET_IMEI,          ///< 查询模块标识，不根据旧字段推断本次查询成功。
     NET_CSQ,           ///< 保存CSQ数值编码，不转换为未经验证的dBm。
-    NET_CONTENT,       ///< 设置兼容内容类型，失败仍结束准备流程。
     NET_DONE           ///< 流程已结束；modem_ready/data_ready分别说明就绪程度。
 } NetworkState;
 /** @brief 前台独占的本轮网络流程；identity借用调用方对象，其余字段由本模块管理。 */
@@ -45,10 +42,11 @@ static struct
     Result result;      ///< 整体流程状态；OK只表示已走完，不要求data_ready为真。
     CommandStep step;   ///< 本网络流程独占AT步骤标志。
     uint32_t deadline_ms, registration_ms; ///< 下一等待截止与自动注册窗口起点，单位单调毫秒。
-    unsigned attempts, poll_pos;           ///< 当前阶段失败探测次数；order中的当前位置0或1。
-    uint8_t order[2], target; ///< 运营商顺序：0=25002、1=25020；target=0xFF表示尚无可用目标。
-    DeviceIdentity *identity; ///< 只借用至本轮结束的可写身份对象，不分配/释放。
-    NetworkSnapshot snapshot; ///< 本轮模块/数据就绪及查询结果；初始清零不等于各查询成功。
+    bool has_checked_country;    ///< 自动附着后只判一次国家，运营商恢复后避免重复分类循环。
+    unsigned attempts, poll_pos; ///< 当前阶段失败探测次数；order中的当前位置0或1。
+    uint8_t order[2], target;    ///< 运营商顺序：0=25002、1=25020；target=0xFF表示尚无可用目标。
+    DeviceIdentity *identity;    ///< 只借用至本轮结束的可写身份对象，不分配/释放。
+    NetworkSnapshot snapshot;    ///< 本轮模块/数据就绪及查询结果；初始清零不等于各查询成功。
 } network;
 /* RAM网络历史仅跨睡眠保留；复位清除，不宣称运营商冷却计时。 */
 /** @brief 仅RAM保存的最近确认国家码；0表示无历史，不等同非俄罗斯。 */
@@ -202,7 +200,7 @@ void network_poll(void)
         {
             if (++network.attempts >= 150)
             {
-                advance(NET_ICCID);
+                network.result = result;
             }
             else
             {
@@ -210,32 +208,20 @@ void network_poll(void)
             }
         }
         return;
-    /* APN配置失败仍保留后续查询机会；当前不根据运营商猜测替代APN。 */
+    /* HTTP V1.4 §1.1：先配置PDP；APN由用户确认沿用。关键配置失败不得带旧参数继续。 */
     case NET_APN:
-        result = at_command_step(&network.step, "AT+QICSGP=1,1,\"" PROJECT_APN "\",\"\",\"\"", "OK",
-                                 PROJECT_COMMAND_TIMEOUT_MS);
-        if (result != RESULT_PENDING)
+        result = at_command_step(&network.step, "AT+QICSGP=1,1,\"" PROJECT_APN "\",\"\",\"\",1",
+                                 "OK", PROJECT_COMMAND_TIMEOUT_MS);
+        if (result == RESULT_OK)
         {
-            advance(NET_DEREGISTER);
+            advance(NET_AUTO);
+        }
+        else if (result != RESULT_PENDING)
+        {
+            network.result = result;
         }
         return;
-    case NET_DEREGISTER:
-        result = at_command_step(&network.step, "AT+COPS=2", "OK", PROJECT_COMMAND_TIMEOUT_MS);
-        if (result != RESULT_PENDING)
-        {
-            advance(result == RESULT_OK ? NET_TELE2 : NET_ICCID);
-        }
-        return;
-    /* 无论锁网成功与否都查询QENG；不能把Tele2未注册直接当作非俄罗斯。 */
-    case NET_TELE2:
-        result = at_command_step(&network.step, "AT+COPS=1,2,\"25020\",7", "OK",
-                                 PROJECT_NETWORK_TIMEOUT_MS);
-        if (result != RESULT_PENDING)
-        {
-            advance(NET_COUNTRY);
-        }
-        return;
-    /* 本轮主小区可确认国家；查询失败保留RAM历史，首次无历史不擅自认定“其他国家”。 */
+    /* 先自动附着再判断国家，避免首次在EU强制注册25020；MCC250仍保留原两运营商业务策略。 */
     case NET_COUNTRY:
         result = at_command_step(&network.step, "AT+QENG=\"servingcell\"",
                                  "+QENG:", PROJECT_COMMAND_TIMEOUT_MS);
@@ -248,12 +234,18 @@ void network_poll(void)
         {
             last_mcc = network.snapshot.cell.mcc;
         }
-        advance(last_mcc == 250 ? NET_RU_SELECT : last_mcc ? NET_AUTO : NET_ICCID);
+        network.has_checked_country = true;
+        advance(last_mcc == 250 ? NET_RU_SELECT : NET_ICCID);
         return;
     case NET_AUTO:
         result = at_command_step(&network.step, "AT+COPS=0", "OK", PROJECT_NETWORK_TIMEOUT_MS);
         if (result != RESULT_PENDING)
         {
+            if (result != RESULT_OK)
+            {
+                network.result = result;
+                return;
+            }
             network.registration_ms = now;
             network.deadline_ms = now;
             advance(NET_AUTO_WAIT);
@@ -273,7 +265,7 @@ void network_poll(void)
         {
             if ((uint32_t)(now - network.registration_ms) >= 60000u)
             {
-                advance(NET_ICCID);
+                network.result = result;
             }
             else
             {
@@ -282,15 +274,23 @@ void network_poll(void)
         }
         return;
     case NET_AUTO_ACTIVATE:
-        result = at_command_step(&network.step, "AT+QIACT=1", "OK", 30000u);
+        result = at_command_step(&network.step, "AT+QIACT=1", "OK", 120000u);
         if (result != RESULT_PENDING)
         {
             network.snapshot.data_ready = result == RESULT_OK;
-            advance(NET_ICCID);
+            if (result == RESULT_OK)
+            {
+                advance(network.has_checked_country ? NET_ICCID : NET_COUNTRY);
+            }
+            else
+            {
+                network.result = result;
+            }
         }
         return;
     /* 0=25002，1=25020；已找到目标时可跳过曾附着运营商，历史不是冷却倒计时。 */
     case NET_RU_SELECT:
+        network.snapshot.data_ready = false; /* 换网后先前自动网络的就绪位失效。 */
         if (network.target != 0xFF && (registered_mask & (1u << network.order[network.poll_pos])))
         {
             next_operator(false, false);
@@ -326,7 +326,8 @@ void network_poll(void)
             }
         }
         return;
-    /* 旧兼容策略不以QIACT的单一应答裁决受限，继续Ping；最终业务连通性仍以HTTP为准。 */
+    /* VERIFY:未提供TCP/IP专册，QIACT主机120秒为策略预算。旧兼容策略不以QIACT的单一应答裁决受限，继续Ping；最终业务连通性仍以HTTP为准。
+     */
     case NET_RU_ACTIVATE:
         result = at_command_step(&network.step, "AT+QIACT=1", "OK", 30000u);
         if (result != RESULT_PENDING)
@@ -372,12 +373,12 @@ void network_poll(void)
         }
         return;
     case NET_IMEI:
-        result = at_command_step(&network.step, "AT+CGSN=1", "+CGSN:", PROJECT_COMMAND_TIMEOUT_MS);
+        result = at_command_step(&network.step, "AT+CGSN", "OK", PROJECT_COMMAND_TIMEOUT_MS);
         if (result != RESULT_PENDING)
         {
             if (result == RESULT_OK)
             {
-                protocol_parse_digits(at_response(), "+CGSN:", network.identity->imei,
+                protocol_parse_digits(at_response(), "", network.identity->imei,
                                       sizeof(network.identity->imei), 15);
             }
             advance(NET_CSQ);
@@ -394,17 +395,7 @@ void network_poll(void)
             {
                 network.snapshot.rssi = (uint8_t)rssi;
             }
-            advance(NET_CONTENT);
-        }
-        return;
-    /* 内容类型设置失败也结束准备流程；因此整体OK只表流程结束，不能替代就绪位。 */
-    case NET_CONTENT:
-        result = at_command_step(&network.step, "AT+QHTTPCFG=\"contenttype\",4", "OK",
-                                 PROJECT_COMMAND_TIMEOUT_MS);
-        if (result != RESULT_PENDING)
-        {
             advance(NET_DONE);
-            network.result = RESULT_OK;
         }
         return;
     case NET_DONE:

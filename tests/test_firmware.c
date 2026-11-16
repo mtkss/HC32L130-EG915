@@ -52,6 +52,12 @@ static uint8_t storage[101];
 static unsigned sleeps, posts, self_posts;
 /** @brief 还需故意返回ERROR的POST次数，消费后递减。 */
 static unsigned fail_posts;
+/** @brief HTTP故障注入：响应码/缺失长度和APN拒绝；仅由当前测试前台设置。 */
+static unsigned http_status = 200;
+static bool omit_http_length, fail_apn;
+/** @brief 扩展边界故障仅由单线程测试驱动，不模拟模块实际电源状态。 */
+static bool oversized_http, fail_http_read, fail_gnss_probe, is_gnss_running;
+static unsigned gnss_start_count;
 /** @brief 用例选择的国家、Ping失败和无GNSS fix故障开关。 */
 static bool is_russia, is_ping_blocked, has_no_gnss_fix;
 /** @brief 收到QGPSEND的次数，用于证明失败后确实尝试清理。 */
@@ -79,6 +85,10 @@ static void mock_reset(void)
     sleeps = posts = self_posts = fail_posts = 0;
     is_russia = is_ping_blocked = has_no_gnss_fix = false;
     gnss_close_count = 0;
+    http_status = 200;
+    omit_http_length = fail_apn = false;
+    oversized_http = fail_http_read = fail_gnss_probe = is_gnss_running = false;
+    gnss_start_count = 0;
     megafon_attempts = tele2_attempts = 0;
 }
 /** @brief 注入串口完整或片段数据，容量溢出令本用例失败。 */
@@ -93,6 +103,35 @@ static void inject(const char *text)
         }
         input[input_head++] = *text++;
     }
+}
+/** @brief 返回当前URL的固定JSON正文，长度与模拟结果URC严格保持一致。 */
+static const char *mock_http_body(void)
+{
+    if (strstr(current_url, "/api/cw"))
+    {
+        return "{\"lat\":31.2,\"lon\":121.3}";
+    }
+    if (strstr(current_url, "selfCheck"))
+    {
+        return "{\"status\":\"1\"}";
+    }
+    return "{\"uploadInterval\":180,\"moveUploadInterval\":60,\"continuesUploadInterval\":720,"
+           "\"locateType\":2}";
+}
+/** @brief 生成带真实字节长度的HTTP结果；可注入缺失长度和拒绝代码。 */
+static void inject_http_result(const char *prefix)
+{
+    char reply[96];
+    if (omit_http_length)
+    {
+        snprintf(reply, sizeof(reply), "OK\r\n%s 0,%u\r\n", prefix, http_status);
+    }
+    else
+    {
+        snprintf(reply, sizeof(reply), "OK\r\n%s 0,%u,%u\r\n", prefix, http_status,
+                 (unsigned)(oversized_http ? 1000u : strlen(mock_http_body())));
+    }
+    inject(reply);
 }
 /** @brief 模块协议替身，精确验证URL/JSON长度并按命令返回可控响应。 */
 static void answer(const char *command)
@@ -111,23 +150,25 @@ static void answer(const char *command)
     }
     else if (!strcmp(command, "AT+QHTTPGET=80"))
     {
-        inject("+QHTTPGET: 0,200,40\r\n");
+        inject_http_result("+QHTTPGET:");
     }
-    else if (!strcmp(command, "AT+QHTTPREAD=256"))
+    else if (!strcmp(command, "AT+QHTTPREAD=80"))
     {
-        if (strstr(current_url, "/api/cw"))
-        {
-            inject("CONNECT\r\n{\"lat\":31.2,\"lon\":121.3}\r\n+QHTTPREAD: 0\r\n");
-        }
-        else if (strstr(current_url, "selfCheck"))
-        {
-            inject("CONNECT\r\n{\"status\":\"1\"}\r\n+QHTTPREAD: 0\r\n");
-        }
-        else
-        {
-            inject("CONNECT\r\n{\"uploadInterval\":180,\"moveUploadInterval\":60,"
-                   "\"continuesUploadInterval\":720,\"locateType\":2}\r\n+QHTTPREAD: 0\r\n");
-        }
+        inject("CONNECT\r\n");
+        inject(mock_http_body());
+        inject(fail_http_read ? "\r\nOK\r\n+QHTTPREAD: 714\r\n" : "\r\nOK\r\n+QHTTPREAD: 0\r\n");
+    }
+    else if (!strcmp(command, "AT+QGPS=?"))
+    {
+        inject(fail_gnss_probe ? "ERROR\r\n" : "+QGPS: (0,1)\r\nOK\r\n");
+    }
+    else if (!strcmp(command, "AT+QGPS?"))
+    {
+        inject(is_gnss_running ? "+QGPS: 1\r\nOK\r\n" : "+QGPS: 0\r\nOK\r\n");
+    }
+    else if (!strncmp(command, "AT+QICSGP=", 10))
+    {
+        inject(fail_apn ? "ERROR\r\n" : "OK\r\n");
     }
     else if (!strcmp(command, "AT+CPIN?"))
     {
@@ -162,9 +203,9 @@ static void answer(const char *command)
     {
         inject("+QCCID: 89860012345678901234\r\nOK\r\n");
     }
-    else if (!strcmp(command, "AT+CGSN=1"))
+    else if (!strcmp(command, "AT+CGSN"))
     {
-        inject("+CGSN: 123456789012345\r\nOK\r\n");
+        inject("\r\n123456789012345\r\nOK\r\n");
     }
     else if (!strcmp(command, "AT+CSQ"))
     {
@@ -185,9 +226,16 @@ static void answer(const char *command)
             inject("+QGPSLOC: 123519.0,31.2,121.3,1.0,20,2,0,0,0,161126,8\r\nOK\r\n");
         }
     }
+    else if (!strcmp(command, "AT+QGPS=1"))
+    {
+        gnss_start_count++;
+        is_gnss_running = true;
+        inject("OK\r\n");
+    }
     else if (!strcmp(command, "AT+QGPSEND"))
     {
         gnss_close_count++;
+        is_gnss_running = false;
         inject("OK\r\n");
     }
     else if (!strncmp(command, "AT+QPING", 8))
@@ -204,9 +252,15 @@ static void answer(const char *command)
         tele2_attempts++;
         inject("OK\r\n");
     }
-    else
+    else if (!strcmp(command, "ATE0") || !strcmp(command, "AT+COPS=0") ||
+             !strcmp(command, "AT+QIACT=1") || !strncmp(command, "AT+QHTTPCFG=", 12))
     {
         inject("OK\r\n");
+    }
+    else
+    {
+        CHECK(false);
+        inject("ERROR\r\n");
     }
 }
 /** @brief 提供无寄存器访问的测试初始化替身。 */
@@ -279,7 +333,7 @@ Result board_uart_write(const char *bytes, size_t count)
             }
             else
             {
-                inject("+QHTTPPOST: 0,200,120\r\n");
+                inject_http_result("+QHTTPPOST:");
             }
         }
         expected_payload = 0;
@@ -438,6 +492,8 @@ static void test_codecs_and_cache(void)
     protocol_parse_neighbors(text, &cell);
     CHECK(cell.neighbor_count == 3);
     CHECK(protocol_build_cell_url(&cell, 123456, text, sizeof(text)) == RESULT_OK);
+    cell.rssi_dbm = -120;
+    CHECK(protocol_build_cell_url(&cell, 123456, text, sizeof(text)) == RESULT_INVALID);
     CHECK(protocol_parse_digits("+CGSN: 123456789012345\r\n", "+CGSN:", digits, 16, 15) ==
           RESULT_OK);
     CHECK(strlen(digits) == 15);
@@ -613,8 +669,8 @@ static void test_production_lifecycle(void)
     CHECK(posts == 1);
 }
 
-/** @brief 俄罗斯两运营商与受限探测失败必须有限结束，并能关闭模块。 */
-static void test_russian_network(void)
+/** @brief 自动附着后MCC250保留原两运营商策略；APN拒绝不伪造PDP成功。 */
+static void test_eg800z_auto_network_apn_failure(void)
 {
     unsigned i;
     DeviceIdentity identity = {123456, "", ""};
@@ -631,14 +687,15 @@ static void test_russian_network(void)
     }
     CHECK(network_result() == RESULT_OK);
     CHECK(network_snapshot()->data_ready);
-    CHECK(megafon_attempts >= 1 && tele2_attempts >= 2);
+    CHECK(megafon_attempts >= 1 && tele2_attempts >= 1);
+    CHECK(!strcmp(identity.imei, "123456789012345"));
     network_shutdown_start();
     for (i = 0; i < 500 && !network_shutdown_poll(); i++)
     {
         clock_ms += 100;
     }
     CHECK(!modem_supply);
-    is_ping_blocked = true;
+    fail_apn = true;
     at_init();
     CHECK(network_start(&identity) == RESULT_OK);
     for (i = 0; i < 10000 && network_result() == RESULT_PENDING; i++)
@@ -647,7 +704,8 @@ static void test_russian_network(void)
         at_poll();
         network_poll();
     }
-    CHECK(network_result() == RESULT_OK);
+    CHECK(network_result() == RESULT_IO);
+    CHECK(!network_snapshot()->data_ready);
     network_shutdown_start();
     for (i = 0; i < 500 && !network_shutdown_poll(); i++)
     {
@@ -656,7 +714,7 @@ static void test_russian_network(void)
     CHECK(!modem_supply);
 }
 
-/** @brief GNSS四次失败必须先尝试关闭，再独立失败或回退到基站。 */
+/** @brief GNSS总窗口超时必须先关闭，再独立失败或回退到主小区。 */
 static void test_location_failure_cleanup(void)
 {
     unsigned i;
@@ -665,7 +723,7 @@ static void test_location_failure_cleanup(void)
     has_no_gnss_fix = true;
     at_init();
     CHECK(location_start(LOCATION_GNSS_FIRST, LOCATION_GNSS, 123456) == RESULT_OK);
-    for (i = 0; i < 2000 && location_result() == RESULT_PENDING; i++)
+    for (i = 0; i < 3000 && location_result() == RESULT_PENDING; i++)
     {
         clock_ms += 100;
         at_poll();
@@ -685,12 +743,168 @@ static void test_location_failure_cleanup(void)
     CHECK(gnss_close_count == 2);
 }
 
+/** @brief 正文中的ERROR/OK/READ标记均必须当载荷，只有完整正文外的尾部可完成。 */
+static void test_http_read_embedded_control_text_is_payload(void)
+{
+    CommandStep step = {false};
+    const char *body = "ERROR\r\nOK\r\n+QHTTPREAD: 0\r\n";
+    mock_reset();
+    at_init();
+    CHECK(at_http_read_step(&step, strlen(body), 85000u) == RESULT_PENDING);
+    inject("CON");
+    at_poll();
+    clock_ms += 100;
+    CHECK(at_result() == RESULT_PENDING);
+    inject("NECT\r\n");
+    inject(body);
+    at_poll();
+    clock_ms += 100;
+    at_poll();
+    CHECK(at_result() == RESULT_PENDING);
+    inject("\r\nOK\r\n+QHTTPREAD: 0\r\n");
+    at_poll();
+    clock_ms += 100;
+    at_poll();
+    CHECK(at_http_read_step(&step, strlen(body), 85000u) == RESULT_OK);
+    CHECK(at_http_read_step(&step, 0, 85000u) == RESULT_INVALID);
+    CHECK(at_start("AT", 2, false, "", 1000u) == RESULT_INVALID);
+    CHECK(at_start("AT", 2, false, "CONNECT", 130000u) == RESULT_OK);
+    clock_ms += 126000u;
+    at_poll();
+    CHECK(at_result() == RESULT_PENDING);
+    clock_ms += 5000u;
+    at_poll();
+    CHECK(at_result() == RESULT_TIMEOUT);
+}
+/** @brief 成功GET只发布正文；错误码前缀、缺长度和服务器拒绝均不能作为成功。 */
+static void test_http_status_length_and_body_contract(void)
+{
+    unsigned scenario, i;
+    for (scenario = 0; scenario < 6; scenario++)
+    {
+        mock_reset();
+        automatic = true;
+        at_init();
+        http_cancel();
+        if (scenario == 1)
+        {
+            http_status = 2000;
+        }
+        if (scenario == 2)
+        {
+            omit_http_length = true;
+        }
+        if (scenario == 3)
+        {
+            http_status = 503;
+        }
+        if (scenario == 4)
+        {
+            oversized_http = true;
+        }
+        if (scenario == 5)
+        {
+            fail_http_read = true;
+        }
+        CHECK(http_start("http://example.invalid", NULL) == RESULT_OK);
+        for (i = 0; i < 3000 && http_result() == RESULT_PENDING; i++)
+        {
+            clock_ms += 100;
+            at_poll();
+            http_poll();
+        }
+        if (scenario == 0)
+        {
+            CHECK(http_result() == RESULT_OK);
+            CHECK(!strcmp(http_response(), mock_http_body()));
+            CHECK(strstr(http_response(), "CONNECT") == NULL);
+        }
+        else if (scenario == 4)
+        {
+            CHECK(http_result() == RESULT_OVERFLOW);
+        }
+        else if (scenario == 5)
+        {
+            CHECK(http_result() == RESULT_IO);
+        }
+        else if (scenario == 2)
+        {
+            CHECK(http_result() == RESULT_FORMAT);
+        }
+        else
+        {
+            CHECK(http_result() == RESULT_REJECTED);
+        }
+    }
+    http_cancel();
+}
+/** @brief QGPSLOC依据手册只接受2D/3D、整数卫星数和非负速度；空COG允许。 */
+static void test_gnss_documented_field_constraints(void)
+{
+    Position position = {0}, before;
+    CHECK(protocol_parse_gnss("+QGPSLOC: 123519,-31.2,-121.3,1,20,3,,0,0,161126,08\r\n",
+                              &position) == RESULT_OK);
+    CHECK(position.latitude_deg < 0 && position.longitude_deg < 0);
+    before = position;
+    CHECK(protocol_parse_gnss("+QGPSLOC: 123519,31.2,121.3,1,20,4,0,0,0,161126,8\r\n", &position) ==
+          RESULT_INVALID);
+    CHECK(!memcmp(&before, &position, sizeof(position)));
+    CHECK(protocol_parse_gnss("+QGPSLOC: 123519,31.2,121.3,1,20,3,0,-1,0,161126,8\r\n",
+                              &position) == RESULT_INVALID);
+    CHECK(protocol_parse_gnss("+QGPSLOC: 123519,31.2,121.3,1,20,3,0,0,0,161126,1.5\r\n",
+                              &position) == RESULT_INVALID);
+}
+
+/** @brief 已运行GNSS不重复开启；能力探测失败允许主小区回退，单项自检则明确失败。 */
+static void test_gnss_running_and_unsupported_capability(void)
+{
+    unsigned scenario, i;
+    for (scenario = 0; scenario < 3; scenario++)
+    {
+        mock_reset();
+        automatic = true;
+        at_init();
+        is_gnss_running = scenario == 0;
+        fail_gnss_probe = scenario != 0;
+        CHECK(location_start(LOCATION_GNSS_FIRST, scenario == 2 ? LOCATION_GNSS : LOCATION_NONE,
+                             123456) == RESULT_OK);
+        for (i = 0; i < 3000 && location_result() == RESULT_PENDING; i++)
+        {
+            clock_ms += 100;
+            at_poll();
+            location_poll();
+        }
+        if (scenario == 0)
+        {
+            CHECK(location_result() == RESULT_OK);
+            CHECK(location_position()->source == LOCATION_GNSS);
+            CHECK(gnss_start_count == 0 && gnss_close_count == 1);
+        }
+        else if (scenario == 1)
+        {
+            CHECK(location_result() == RESULT_OK);
+            CHECK(location_position()->source == LOCATION_CELL);
+            CHECK(gnss_start_count == 0 && gnss_close_count == 0);
+        }
+        else
+        {
+            CHECK(location_result() == RESULT_IO);
+            CHECK(gnss_close_count == 0);
+        }
+    }
+}
+
 /** @brief 测试入口由半主机退出，不访问真实设备。 */
 int main(void)
 {
     mock_reset();
     test_codecs_and_cache();
     test_at();
+    test_http_read_embedded_control_text_is_payload();
+    test_http_status_length_and_body_contract();
+    test_gnss_documented_field_constraints();
+    mock_reset();
+    at_init();
     CHECK(http_start("http://example.invalid", NULL) == RESULT_OK);
     http_cancel();
     CHECK(http_result() != RESULT_PENDING);
@@ -708,8 +922,9 @@ int main(void)
     {
         clock_ms += 100;
     }
-    test_russian_network();
+    test_eg800z_auto_network_apn_failure();
     test_location_failure_cleanup();
+    test_gnss_running_and_unsupported_capability();
     printf("TESTS checks=%u failures=%u\n", checks, failures);
     test_exit(failures ? 1u : 0u);
     return failures ? 1 : 0;

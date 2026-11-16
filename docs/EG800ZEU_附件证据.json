@@ -1,0 +1,25 @@
+{
+  "documents": [
+    {
+      "file": "3775866783Quectel_EC800Z&EG800Z&EG915Z系列(UniRTOS)_AT命令手册_V1.0.pdf",
+      "bytes": 1262040,
+      "sha256": "741e6cfd0a0afe9bd574e642dd9421ae18860497045d5eb14303a1ce29b49ff7"
+    },
+    {
+      "file": "3775892713Quectel_EC600Z&EC800Z&EG800Z系列_HTTP(S)_应用指导_V1.4.pdf",
+      "bytes": 628634,
+      "sha256": "9f011cd51fbd3912891155be1dbfa2d3d1e00a45d33a671170261124b0f8dc79"
+    },
+    {
+      "file": "3775902624Quectel_LTE_Standard(E)系列_QuecCell_应用指导_V1.4.pdf",
+      "bytes": 442993,
+      "sha256": "5d018e5422cc2648b09ecc0f2fbc6f97ec03163a3f4a6336121e67a6a465f795"
+    },
+    {
+      "file": "3775936097Quectel_EG800Z-CN_GNSS_应用指导_V1.0.0_Preliminary_20260211.pdf",
+      "bytes": 566830,
+      "sha256": "95d0387caa36f628c4dc90bf161afa25049f8319049159979a1fc065e05c703c"
+    }
+  ],
+  "applicability": "GNSS手册标题为CN，用户确认适用于EU；APN和PWRKEY/UART接线沿用原板。PDF原件未随源码分发。"
+}

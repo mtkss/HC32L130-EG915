@@ -30,10 +30,17 @@
 #define PROJECT_LED_TOGGLE_MS 116u
 /** @brief 普通AT响应预算5000ms，新毫秒默认；原迭代计数无法直接换算，需真实模块核验。 */
 #define PROJECT_COMMAND_TIMEOUT_MS 5000u
-/** @brief HTTP每一阶段响应预算85000ms；不是整个上报操作总期限，模块命令内部另有80s/60s/20s参数。 */
+/** @brief GET/POST结果和READ主机预算85000ms；请求响应/READ包间隔为80s，POST输入60s，CONNECT单独留130s。 */
 #define PROJECT_HTTP_TIMEOUT_MS 85000u
-/** @brief 手动/自动COPS等待上限120000ms，来自原显式Tele2锁网预算；非整轮网络总时长。 */
-#define PROJECT_NETWORK_TIMEOUT_MS 120000u
+/** @brief POST CONNECT最长125秒（HTTP V1.4 §2.3.5），主机留5秒余量。 */
+#define PROJECT_HTTP_CONNECT_TIMEOUT_MS 130000u
+/** @brief AT主机预算上限240秒，容纳COPS 180秒；所有差值仍远小于2^31毫秒。 */
+#define PROJECT_AT_MAX_TIMEOUT_MS 240000u
+/** @brief GNSS定位策略窗口120秒、每5秒查询；这是产品软件预算，不是TTFF保证。 */
+#define PROJECT_GNSS_FIX_TIMEOUT_MS 120000u
+#define PROJECT_GNSS_POLL_INTERVAL_MS 5000u
+/** @brief COPS等待185000ms，依据UniRTOS AT手册§6.1最大180s加5s主机余量。 */
+#define PROJECT_NETWORK_TIMEOUT_MS 185000u
 /** @brief 失败/取消后要求250ms无新字节；连续噪声另有2s排空上限，不能提供URC完美事务关联。 */
 #define PROJECT_AT_QUIET_MS 250u
 /** @brief 运动样本名义间隔200ms，沿用原SC7A20任务；前台延迟时不追赶补采。 */
@@ -52,6 +59,6 @@
 #define PROJECT_SELF_CHECK_URL "http://182.92.135.10:5055/receData/selfCheck"
 /** @brief 原基站换坐标服务地址；参数布局在protocol_codec中按旧格式编码。 */
 #define PROJECT_CELL_URL "http://gps.qianxingtu.cn/api/cw"
-/** @brief 沿用旧APN sxzcat1；适用SIM/运营商需实网确认，不依据Ping结果自动改写。 */
+/** @brief APN sxzcat1由用户在本次EG800Z适配中确认沿用；不复制手册示例值，实际漫游连通性仍待实网验收。 */
 #define PROJECT_APN "sxzcat1"
 #endif

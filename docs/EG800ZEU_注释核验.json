@@ -1,0 +1,1907 @@
+{
+  "branch": "feature/eg800z-eu-gnss",
+  "baseCommit": "d54f2f1c4df5ed055262f1b03c210d904f4c9913",
+  "files": [
+    {
+      "path": "core/domain.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "core/utc_calendar.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "core/utc_calendar.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "app/application.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "app/application.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "app/main.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "components/location_manager.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "components/network_manager.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "components/sampling_service.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "components/sampling_service.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "components/upload_schedule.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "components/upload_schedule.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/at_client.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/at_client.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/http_service.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/http_service.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/identity_store.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/identity_store.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/record_cache.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/record_cache.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/report_service.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "services/report_service.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "platform/board.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "platform/board.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "platform/board_pins.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "platform/interrupt_dispatch.c",
+      "hasModuleContext": true
+    },
+    {
+      "path": "config/project_config.h",
+      "hasModuleContext": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "hasModuleContext": true
+    }
+  ],
+  "functions": [
+    {
+      "path": "core/utc_calendar.c",
+      "name": "leap",
+      "line": 10,
+      "hasPurpose": true
+    },
+    {
+      "path": "core/utc_calendar.c",
+      "name": "month_days",
+      "line": 15,
+      "hasPurpose": true
+    },
+    {
+      "path": "core/utc_calendar.c",
+      "name": "utc_calendar_to_epoch",
+      "line": 21,
+      "hasPurpose": true
+    },
+    {
+      "path": "core/utc_calendar.c",
+      "name": "utc_calendar_from_epoch",
+      "line": 42,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "begin_sample",
+      "line": 47,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "begin_shutdown",
+      "line": 67,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "confirm_press",
+      "line": 83,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "receive_serial_number",
+      "line": 105,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "update_led",
+      "line": 157,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "accept_location",
+      "line": 173,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "begin_report",
+      "line": 189,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "application_init",
+      "line": 208,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "application_poll",
+      "line": 235,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/application.c",
+      "name": "application_snapshot",
+      "line": 513,
+      "hasPurpose": true
+    },
+    {
+      "path": "app/main.c",
+      "name": "main",
+      "line": 10,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "name": "choose_source",
+      "line": 41,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "name": "fallback",
+      "line": 58,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "name": "location_start",
+      "line": 86,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "name": "location_poll",
+      "line": 109,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "name": "location_result",
+      "line": 285,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "name": "location_position",
+      "line": 290,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "name": "location_rsrp_dbm",
+      "line": 295,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/location_manager.c",
+      "name": "location_cancel",
+      "line": 301,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "name": "due",
+      "line": 63,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "name": "advance",
+      "line": 68,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "name": "next_operator",
+      "line": 80,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "name": "network_start",
+      "line": 108,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "name": "network_poll",
+      "line": 131,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "name": "network_result",
+      "line": 410,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "name": "network_snapshot",
+      "line": 415,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "name": "network_shutdown_start",
+      "line": 420,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/network_manager.c",
+      "name": "network_shutdown_poll",
+      "line": 438,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/sampling_service.c",
+      "name": "sampling_start",
+      "line": 21,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/sampling_service.c",
+      "name": "sampling_poll",
+      "line": 43,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/sampling_service.c",
+      "name": "sampling_result",
+      "line": 83,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/sampling_service.c",
+      "name": "sampling_copy",
+      "line": 88,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/sampling_service.c",
+      "name": "sampling_cancel",
+      "line": 97,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/upload_schedule.c",
+      "name": "upload_schedule_init",
+      "line": 9,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/upload_schedule.c",
+      "name": "upload_schedule_due",
+      "line": 19,
+      "hasPurpose": true
+    },
+    {
+      "path": "components/upload_schedule.c",
+      "name": "upload_schedule_complete",
+      "line": 49,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "finish",
+      "line": 27,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "at_init",
+      "line": 38,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "at_start",
+      "line": 45,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "at_poll",
+      "line": 81,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "at_result",
+      "line": 207,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "at_response",
+      "line": 212,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "at_cancel",
+      "line": 217,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "execute_step",
+      "line": 235,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "at_command_step",
+      "line": 266,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "at_payload_step",
+      "line": 273,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/at_client.c",
+      "name": "at_http_read_step",
+      "line": 280,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/http_service.c",
+      "name": "read_unsigned",
+      "line": 38,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/http_service.c",
+      "name": "accept_result",
+      "line": 68,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/http_service.c",
+      "name": "http_start",
+      "line": 109,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/http_service.c",
+      "name": "http_poll",
+      "line": 143,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/http_service.c",
+      "name": "http_result",
+      "line": 251,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/http_service.c",
+      "name": "http_response",
+      "line": 256,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/http_service.c",
+      "name": "http_cancel",
+      "line": 261,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/identity_store.c",
+      "name": "identity_store_read",
+      "line": 10,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/identity_store.c",
+      "name": "identity_store_serial",
+      "line": 32,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/identity_store.c",
+      "name": "identity_store_checked",
+      "line": 57,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/identity_store.c",
+      "name": "identity_store_activated",
+      "line": 62,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/identity_store.c",
+      "name": "identity_store_mark_checked",
+      "line": 67,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/identity_store.c",
+      "name": "identity_store_mark_activated",
+      "line": 72,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "finite_value",
+      "line": 16,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "find_value",
+      "line": 27,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "read_number",
+      "line": 62,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_parse_config",
+      "line": 96,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_is_approved",
+      "line": 134,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "split_csv",
+      "line": 148,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "parse_scalar",
+      "line": 184,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_parse_gnss",
+      "line": 199,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_parse_position",
+      "line": 248,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_parse_cell",
+      "line": 271,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_parse_neighbors",
+      "line": 311,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_build_cell_url",
+      "line": 343,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_build_report",
+      "line": 372,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_parse_digits",
+      "line": 419,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/protocol_codec.c",
+      "name": "protocol_parse_ntp",
+      "line": 452,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/record_cache.c",
+      "name": "record_cache_init",
+      "line": 15,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/record_cache.c",
+      "name": "record_cache_push",
+      "line": 21,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/record_cache.c",
+      "name": "record_cache_peek",
+      "line": 49,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/record_cache.c",
+      "name": "record_cache_pop",
+      "line": 54,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/record_cache.c",
+      "name": "record_cache_count",
+      "line": 63,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/record_cache.c",
+      "name": "record_cache_dropped",
+      "line": 68,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/report_service.c",
+      "name": "report_start",
+      "line": 21,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/report_service.c",
+      "name": "report_poll",
+      "line": 43,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/report_service.c",
+      "name": "report_result",
+      "line": 66,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/report_service.c",
+      "name": "report_outcome",
+      "line": 71,
+      "hasPurpose": true
+    },
+    {
+      "path": "services/report_service.c",
+      "name": "report_cancel",
+      "line": 77,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "enter_critical",
+      "line": 40,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "leave_critical",
+      "line": 47,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "configure_pin",
+      "line": 60,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "start_timer",
+      "line": 73,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "start_uart",
+      "line": 92,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "start_rtc",
+      "line": 114,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_init",
+      "line": 136,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_now_ms",
+      "line": 162,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_modem_supply",
+      "line": 169,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_modem_key",
+      "line": 174,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_led_write",
+      "line": 179,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_take_wake_events",
+      "line": 184,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_take_short_press",
+      "line": 193,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_uart_write",
+      "line": 219,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_uart_read",
+      "line": 236,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_uart_flush",
+      "line": 255,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_uart_take_overflow",
+      "line": 263,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "from_bcd",
+      "line": 272,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "to_bcd",
+      "line": 277,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_rtc_epoch",
+      "line": 282,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_rtc_set",
+      "line": 294,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_sleep",
+      "line": 314,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_sample_adc",
+      "line": 373,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "sensor_transfer",
+      "line": 446,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_motion_start",
+      "line": 517,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_motion_sample",
+      "line": 559,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_motion_stop",
+      "line": 584,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_storage_read",
+      "line": 600,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "board_storage_write",
+      "line": 605,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "Tim0_IRQHandler",
+      "line": 634,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "Uart0_IRQHandler",
+      "line": 646,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "PortB_IRQHandler",
+      "line": 669,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/board.c",
+      "name": "Rtc_IRQHandler",
+      "line": 678,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/interrupt_dispatch.c",
+      "name": "EnableNvic",
+      "line": 16,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/interrupt_dispatch.c",
+      "name": "PORTB_IRQHandler",
+      "line": 30,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/interrupt_dispatch.c",
+      "name": "UART0_IRQHandler",
+      "line": 35,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/interrupt_dispatch.c",
+      "name": "TIM0_IRQHandler",
+      "line": 40,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/interrupt_dispatch.c",
+      "name": "RTC_IRQHandler",
+      "line": 45,
+      "hasPurpose": true
+    },
+    {
+      "path": "platform/interrupt_dispatch.c",
+      "name": "HardFault_Handler",
+      "line": 50,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "mock_reset",
+      "line": 75,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "inject",
+      "line": 95,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "mock_http_body",
+      "line": 108,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "inject_http_result",
+      "line": 122,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "answer",
+      "line": 137,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_init",
+      "line": 267,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_now_ms",
+      "line": 271,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_modem_supply",
+      "line": 276,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_modem_key",
+      "line": 281,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_led_write",
+      "line": 286,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_take_short_press",
+      "line": 291,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_take_wake_events",
+      "line": 298,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_uart_write",
+      "line": 303,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_uart_read",
+      "line": 358,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_uart_flush",
+      "line": 372,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_uart_take_overflow",
+      "line": 378,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_rtc_epoch",
+      "line": 385,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_rtc_set",
+      "line": 390,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_sleep",
+      "line": 396,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_sample_adc",
+      "line": 403,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_motion_start",
+      "line": 410,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_motion_sample",
+      "line": 415,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_motion_stop",
+      "line": 423,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_storage_read",
+      "line": 427,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "board_storage_write",
+      "line": 432,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "SystemInit",
+      "line": 442,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_codecs_and_cache",
+      "line": 446,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_at",
+      "line": 536,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_schedule",
+      "line": 570,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_application",
+      "line": 581,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_production_lifecycle",
+      "line": 616,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_eg800z_auto_network_apn_failure",
+      "line": 673,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_location_failure_cleanup",
+      "line": 718,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_http_read_embedded_control_text_is_payload",
+      "line": 747,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_http_status_length_and_body_contract",
+      "line": 780,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_gnss_documented_field_constraints",
+      "line": 842,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "test_gnss_running_and_unsupported_capability",
+      "line": 859,
+      "hasPurpose": true
+    },
+    {
+      "path": "tests/test_firmware.c",
+      "name": "main",
+      "line": 898,
+      "hasPurpose": true
+    }
+  ],
+  "publicInterfaces": [
+    {
+      "path": "core/utc_calendar.h",
+      "name": "utc_calendar_to_epoch",
+      "parameters": [
+        "year",
+        "month",
+        "day",
+        "hour",
+        "minute",
+        "second"
+      ],
+      "labels": [
+        "year",
+        "month",
+        "day",
+        "hour",
+        "minute",
+        "second"
+      ]
+    },
+    {
+      "path": "core/utc_calendar.h",
+      "name": "utc_calendar_from_epoch",
+      "parameters": [
+        "epoch_s",
+        "fields"
+      ],
+      "labels": [
+        "epoch_s",
+        "fields"
+      ]
+    },
+    {
+      "path": "app/application.h",
+      "name": "application_snapshot",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "app/application.h",
+      "name": "application_init",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "app/application.h",
+      "name": "application_poll",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/location_manager.h",
+      "name": "location_start",
+      "parameters": [
+        "policy",
+        "only_source",
+        "serial_number"
+      ],
+      "labels": [
+        "policy",
+        "only_source",
+        "serial_number"
+      ]
+    },
+    {
+      "path": "components/location_manager.h",
+      "name": "location_poll",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/location_manager.h",
+      "name": "location_result",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/location_manager.h",
+      "name": "location_position",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/location_manager.h",
+      "name": "location_rsrp_dbm",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/location_manager.h",
+      "name": "location_cancel",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/network_manager.h",
+      "name": "network_start",
+      "parameters": [
+        "identity"
+      ],
+      "labels": [
+        "identity"
+      ]
+    },
+    {
+      "path": "components/network_manager.h",
+      "name": "network_poll",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/network_manager.h",
+      "name": "network_result",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/network_manager.h",
+      "name": "network_snapshot",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/network_manager.h",
+      "name": "network_shutdown_start",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/network_manager.h",
+      "name": "network_shutdown_poll",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/sampling_service.h",
+      "name": "sampling_start",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/sampling_service.h",
+      "name": "sampling_poll",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/sampling_service.h",
+      "name": "sampling_result",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/sampling_service.h",
+      "name": "sampling_copy",
+      "parameters": [
+        "record"
+      ],
+      "labels": [
+        "record"
+      ]
+    },
+    {
+      "path": "components/sampling_service.h",
+      "name": "sampling_cancel",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "components/upload_schedule.h",
+      "name": "upload_schedule_init",
+      "parameters": [
+        "schedule",
+        "now_ms"
+      ],
+      "labels": [
+        "schedule",
+        "now_ms"
+      ]
+    },
+    {
+      "path": "components/upload_schedule.h",
+      "name": "upload_schedule_due",
+      "parameters": [
+        "schedule",
+        "config",
+        "moving",
+        "now_ms"
+      ],
+      "labels": [
+        "schedule",
+        "config",
+        "moving",
+        "now_ms"
+      ]
+    },
+    {
+      "path": "components/upload_schedule.h",
+      "name": "upload_schedule_complete",
+      "parameters": [
+        "schedule",
+        "moving",
+        "now_ms"
+      ],
+      "labels": [
+        "schedule",
+        "moving",
+        "now_ms"
+      ]
+    },
+    {
+      "path": "services/at_client.h",
+      "name": "at_init",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/at_client.h",
+      "name": "at_poll",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/at_client.h",
+      "name": "at_start",
+      "parameters": [
+        "text",
+        "length",
+        "raw",
+        "expected",
+        "timeout_ms"
+      ],
+      "labels": [
+        "text",
+        "length",
+        "raw",
+        "expected",
+        "timeout_ms"
+      ]
+    },
+    {
+      "path": "services/at_client.h",
+      "name": "at_result",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/at_client.h",
+      "name": "at_response",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/at_client.h",
+      "name": "at_cancel",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/at_client.h",
+      "name": "at_command_step",
+      "parameters": [
+        "step",
+        "command",
+        "expected",
+        "timeout_ms"
+      ],
+      "labels": [
+        "step",
+        "command",
+        "expected",
+        "timeout_ms"
+      ]
+    },
+    {
+      "path": "services/at_client.h",
+      "name": "at_payload_step",
+      "parameters": [
+        "step",
+        "bytes",
+        "count",
+        "expected",
+        "timeout_ms"
+      ],
+      "labels": [
+        "step",
+        "bytes",
+        "count",
+        "expected",
+        "timeout_ms"
+      ]
+    },
+    {
+      "path": "services/at_client.h",
+      "name": "at_http_read_step",
+      "parameters": [
+        "step",
+        "body_length",
+        "timeout_ms"
+      ],
+      "labels": [
+        "step",
+        "body_length",
+        "timeout_ms"
+      ]
+    },
+    {
+      "path": "services/http_service.h",
+      "name": "http_start",
+      "parameters": [
+        "url",
+        "body"
+      ],
+      "labels": [
+        "url",
+        "body"
+      ]
+    },
+    {
+      "path": "services/http_service.h",
+      "name": "http_poll",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/http_service.h",
+      "name": "http_result",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/http_service.h",
+      "name": "http_response",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/http_service.h",
+      "name": "http_cancel",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/identity_store.h",
+      "name": "identity_store_read",
+      "parameters": [
+        "serial_number"
+      ],
+      "labels": [
+        "serial_number"
+      ]
+    },
+    {
+      "path": "services/identity_store.h",
+      "name": "identity_store_serial",
+      "parameters": [
+        "serial_number"
+      ],
+      "labels": [
+        "serial_number"
+      ]
+    },
+    {
+      "path": "services/identity_store.h",
+      "name": "identity_store_checked",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/identity_store.h",
+      "name": "identity_store_activated",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/identity_store.h",
+      "name": "identity_store_mark_checked",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/identity_store.h",
+      "name": "identity_store_mark_activated",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_parse_config",
+      "parameters": [
+        "response",
+        "output"
+      ],
+      "labels": [
+        "response",
+        "output"
+      ]
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_is_approved",
+      "parameters": [
+        "response"
+      ],
+      "labels": [
+        "response"
+      ]
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_parse_gnss",
+      "parameters": [
+        "response",
+        "output"
+      ],
+      "labels": [
+        "response",
+        "output"
+      ]
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_parse_position",
+      "parameters": [
+        "response",
+        "output"
+      ],
+      "labels": [
+        "response",
+        "output"
+      ]
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_parse_cell",
+      "parameters": [
+        "response",
+        "output"
+      ],
+      "labels": [
+        "response",
+        "output"
+      ]
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_parse_neighbors",
+      "parameters": [
+        "response",
+        "cell"
+      ],
+      "labels": [
+        "response",
+        "cell"
+      ]
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_build_cell_url",
+      "parameters": [
+        "cell",
+        "serial_number",
+        "output",
+        "capacity"
+      ],
+      "labels": [
+        "cell",
+        "serial_number",
+        "output",
+        "capacity"
+      ]
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_build_report",
+      "parameters": [
+        "record",
+        "identity",
+        "check",
+        "output",
+        "capacity",
+        "length"
+      ],
+      "labels": [
+        "record",
+        "identity",
+        "check",
+        "output",
+        "capacity",
+        "length"
+      ]
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_parse_digits",
+      "parameters": [
+        "response",
+        "prefix",
+        "output",
+        "capacity",
+        "minimum"
+      ],
+      "labels": [
+        "response",
+        "prefix",
+        "output",
+        "capacity",
+        "minimum"
+      ]
+    },
+    {
+      "path": "services/protocol_codec.h",
+      "name": "protocol_parse_ntp",
+      "parameters": [
+        "response",
+        "epoch_s"
+      ],
+      "labels": [
+        "response",
+        "epoch_s"
+      ]
+    },
+    {
+      "path": "services/record_cache.h",
+      "name": "record_cache_init",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/record_cache.h",
+      "name": "record_cache_push",
+      "parameters": [
+        "record"
+      ],
+      "labels": [
+        "record"
+      ]
+    },
+    {
+      "path": "services/record_cache.h",
+      "name": "record_cache_peek",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/record_cache.h",
+      "name": "record_cache_pop",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/record_cache.h",
+      "name": "record_cache_count",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/record_cache.h",
+      "name": "record_cache_dropped",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/report_service.h",
+      "name": "report_start",
+      "parameters": [
+        "record",
+        "identity",
+        "check"
+      ],
+      "labels": [
+        "record",
+        "identity",
+        "check"
+      ]
+    },
+    {
+      "path": "services/report_service.h",
+      "name": "report_poll",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/report_service.h",
+      "name": "report_result",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/report_service.h",
+      "name": "report_outcome",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "services/report_service.h",
+      "name": "report_cancel",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_init",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_now_ms",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_modem_supply",
+      "parameters": [
+        "enabled"
+      ],
+      "labels": [
+        "enabled"
+      ]
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_modem_key",
+      "parameters": [
+        "high"
+      ],
+      "labels": [
+        "high"
+      ]
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_led_write",
+      "parameters": [
+        "high"
+      ],
+      "labels": [
+        "high"
+      ]
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_take_short_press",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_take_wake_events",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_uart_write",
+      "parameters": [
+        "bytes",
+        "count"
+      ],
+      "labels": [
+        "bytes",
+        "count"
+      ]
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_uart_read",
+      "parameters": [
+        "byte"
+      ],
+      "labels": [
+        "byte"
+      ]
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_uart_flush",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_uart_take_overflow",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_rtc_epoch",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_rtc_set",
+      "parameters": [
+        "epoch_s"
+      ],
+      "labels": [
+        "epoch_s"
+      ]
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_sleep",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_sample_adc",
+      "parameters": [
+        "battery_v",
+        "temperature_legacy"
+      ],
+      "labels": [
+        "battery_v",
+        "temperature_legacy"
+      ]
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_motion_start",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_motion_sample",
+      "parameters": [
+        "axes_g"
+      ],
+      "labels": [
+        "axes_g"
+      ]
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_motion_stop",
+      "parameters": [],
+      "labels": []
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_storage_read",
+      "parameters": [
+        "offset"
+      ],
+      "labels": [
+        "offset"
+      ]
+    },
+    {
+      "path": "platform/board.h",
+      "name": "board_storage_write",
+      "parameters": [
+        "offset",
+        "value"
+      ],
+      "labels": [
+        "offset",
+        "value"
+      ]
+    }
+  ],
+  "problems": []
+}

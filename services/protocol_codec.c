@@ -220,8 +220,9 @@ Result protocol_parse_gnss(const char *response, Position *output)
             return RESULT_FORMAT;
         }
     }
-    if (values[1] < -90 || values[1] > 90 || values[2] < -180 || values[2] > 180 || values[5] < 2 ||
-        values[8] < 1)
+    if (values[1] < -90 || values[1] > 90 || values[2] < -180 || values[2] > 180 ||
+        (values[5] != 2 && values[5] != 3) || values[8] < 1 || values[8] > 99 ||
+        values[8] != floor(values[8]) || values[3] < 0 || values[6] < 0 || values[7] < 0)
     {
         return RESULT_INVALID;
     }
@@ -232,7 +233,7 @@ Result protocol_parse_gnss(const char *response, Position *output)
     if (*fields[6])
     {
         double bearing;
-        if (!parse_scalar(fields[6], &bearing))
+        if (!parse_scalar(fields[6], &bearing) || bearing < 0 || bearing >= 360)
         {
             return RESULT_FORMAT;
         }
@@ -287,8 +288,9 @@ Result protocol_parse_cell(const char *response, CellInfo *output)
     {
         return RESULT_FORMAT;
     }
-    if (mcc < 1 || mcc > 999 || mnc < 0 || mnc > 999 || rsrp < -200 || rsrp > 0 || rssi < -200 ||
-        rssi > 0)
+    if (mcc < 1 || mcc > 999 || mcc != floor(mcc) || mnc < 0 || mnc > 999 || mnc != floor(mnc) ||
+        rsrp < -156 || rsrp > -44 || rsrp != floor(rsrp) || rssi < -120 || rssi > -25 ||
+        rssi != floor(rssi))
     {
         return RESULT_INVALID;
     }
@@ -343,6 +345,11 @@ Result protocol_build_cell_url(const CellInfo *cell, uint32_t serial_number, cha
 {
     int length;
     if (!cell || !output || !capacity || cell->neighbor_count > 3)
+    {
+        return RESULT_INVALID;
+    }
+    /* 旧接口信号加110再编码为无符号十六进制；低于-110dBm会下溢，拒绝而非发送FFFFFFxx。 */
+    if (cell->rssi_dbm < -110 || cell->rssi_dbm > 0)
     {
         return RESULT_INVALID;
     }
@@ -425,7 +432,7 @@ Result protocol_parse_digits(const char *response, const char *prefix, char *out
         return RESULT_FORMAT;
     }
     cursor += strlen(prefix);
-    while (*cursor == ' ' || *cursor == '"')
+    while (isspace((unsigned char)*cursor) || *cursor == '"')
     {
         cursor++;
     }

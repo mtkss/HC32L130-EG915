@@ -24,7 +24,7 @@ bool protocol_is_approved(const char *response);
 /**
  * @brief 解析QGPSLOC并检查fix、字段及经纬范围；成功才提交output。
  * @param response 非NULL NUL终止串，含+QGPSLOC:的原11字段响应。
- * @param output 非NULL；只在字段完整、数值有限、坐标范围及fix>=2/卫星>=1通过后提交。
+ * @param output 非NULL；只在字段完整、数值有限、坐标范围及fix为2或3/卫星为1..99整数通过后提交。
  * @note 不使用GNSS日期给RTC授时；本接口只发布Position。
  */
 Result protocol_parse_gnss(const char *response, Position *output);
@@ -39,7 +39,8 @@ Result protocol_parse_position(const char *response, Position *output);
  * @brief 解析QENG的18字段格式，成功才提交，未知格式拒绝。
  * @param response 非NULL NUL终止目标响应，调用期间不可被修改。
  * @param output 非NULL可写主小区对象；成功才整体提交，失败保持旧值。
- * @note MCC/MNC/RSRP/RSSI做当前范围检查；TAC/CellID保留文本，不声称完整十六进制语法验证。
+ * @note MCC/MNC须整数；RSRP -156..-44、RSSI -120..-25dBm，依据QuecCell V1.4
+ * §2.3检查；TAC/CellID保留文本，不声称完整十六进制语法验证。
  */
 Result protocol_parse_cell(const char *response, CellInfo *output);
 /**
@@ -54,7 +55,8 @@ void protocol_parse_neighbors(const char *response, CellInfo *cell);
  * @param cell 非NULL，neighbor_count<=3；三个槽的字符串均须NUL终止。
  * @param serial_number 0..999999设备SN，调用者保证范围。
  * @return OK表示完整URL，OVERFLOW表示不足；失败时output可能已有截断前缀。
- * @note 同步借用输入；旧信号偏移与固定槽位格式沿用原实现，不代表已校准无线测量。
+ * @note
+ * 同步借用输入；旧信号偏移与固定槽位格式沿用原实现；主小区RSSI低于-110dBm返回INVALID，避免无符号下溢。EG800Z运行路径不调用旧QCELLINFO邻区解析器。
  * @param output 非NULL可写URL缓冲，失败可能包含截断前缀，不得发送。
  * @param capacity output总字节容量，必须>0且预留NUL。
  */

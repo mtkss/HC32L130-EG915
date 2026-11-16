@@ -211,7 +211,8 @@ void application_init(void)
     app.config.still_interval_min = PROJECT_DEFAULT_STILL_MIN;
     app.config.motion_interval_min = PROJECT_DEFAULT_MOTION_MIN;
     app.config.continuous_interval_min = PROJECT_DEFAULT_CONTINUOUS_MIN;
-    app.config.location_policy = LOCATION_CELL_FIRST;
+    /* EG800Z带GNSS分支默认卫星优先；后续仍允许服务器整组配置覆盖。 */
+    app.config.location_policy = LOCATION_GNSS_FIRST;
     app.is_first_report = true;
     at_init();
     record_cache_init();
@@ -321,7 +322,7 @@ void application_poll(void)
         network = network_snapshot();
         app.record.rssi = network->rssi;
         app.check.has_network = network->data_ready;
-        if (!network->modem_ready)
+        if (result != RESULT_OK || !network->modem_ready || !network->data_ready)
         {
             app.last_error = result;
             begin_shutdown(app.is_self_check ? APP_WAIT_CHECK : APP_SLEEP);
@@ -348,6 +349,9 @@ void application_poll(void)
         if (location_result() != RESULT_OK)
         {
             app.last_error = location_result();
+            /* HTTP失败时模块可能仍在数据模式，统一关机后再开始下一轮，禁止继续NTP/GNSS。 */
+            begin_shutdown(app.is_self_check ? APP_WAIT_CHECK : APP_SLEEP);
+            return;
         }
         accept_location();
         if (app.is_self_check)

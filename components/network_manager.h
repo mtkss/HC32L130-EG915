@@ -1,8 +1,9 @@
 /**
  * @file network_manager.h
- * @brief 推进模块上电、AT/SIM就绪、国家判断和运营商选择。
- * @details 依赖AT与板级电源接口；只拥有网络历史和本轮快照，不修改定位或上传配置。
- * @note 单实例前台；关机也异步推进；RAM历史跨普通睡眠保留、冷启动清除。
+ * @brief 推进EG800Z上电、AT/SIM就绪、自动选网及PDP激活。
+ * @details 依赖AT与板级电源接口；只拥有本轮网络快照，不修改定位或上传配置。
+ * @note
+ * 单实例前台；关机也异步推进；非俄罗斯自动选网；MCC250保留两运营商RAM历史；板级接线沿用用户确认。
  */
 #ifndef NETWORK_MANAGER_H
 #define NETWORK_MANAGER_H
@@ -23,10 +24,10 @@ typedef struct
  */
 Result network_start(DeviceIdentity *identity);
 /**
- * @brief 推进一个非阻塞步骤；保留Tele2首试和俄罗斯0/1两运营商历史。
+ * @brief 推进一个非阻塞步骤；先自动附着/PDP，MCC250才保留原俄罗斯运营商业务策略。
  * @note 与其他AT拥有者互斥，需持续at_poll；每步只提交/查询一次，PWRKEY/重试间隔由毫秒期限控制。
  * @note
- * 多项元数据/APN/内容类型失败仍继续；最终RESULT_OK只表示流程结束，须分查modem_ready/data_ready。
+ * APN/自动选网/附着/PDP失败返回原错误；身份/CSQ/小区元数据尽力查询。俄罗斯探测的可用位仍按原策略；最终须检查data_ready，且不证明业务服务器可访问。
  */
 void network_poll(void);
 /** @brief 查询本轮网络流程结果；OK表示模块流程结束，数据是否可用另见snapshot。 */

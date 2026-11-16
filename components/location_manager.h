@@ -13,13 +13,15 @@
  * @param only_source NONE允许按偏好回退；GNSS/CELL仅测该来源，不回退到另一项目。
  * @param serial_number 0..999999设备SN，按值保存供基站URL使用。
  * @return OK表示启动被接受，BUSY保持当前定位不变；只有location_result()==OK才有有效结果。
- * @note 前台不可重入；参数范围由调用者保证，start没有完整枚举范围校验。
+ * @note 前台不可重入；非法枚举或SN>999999返回INVALID，当前事务不变。
  */
 Result location_start(LocationPolicy policy, LocationSource only_source, uint32_t serial_number);
 /**
  * @brief 每主循环推进定位一步；等待不阻塞，失败按启动策略回退。
- * @note 每轮先推进at_poll；基站分支调用HTTP，GNSS分支最多4次取定位，长等待均保存期限后返回。
- * @note 关闭AGPS/GPS失败仍会结束/回退，最终断电由APP负责；软件关闭完成不证明模块物理功能已停。
+ * @note
+ * 每轮先推进at_poll；基站分支调用HTTP，GNSS分支在120秒策略窗口内每5秒取定位，长等待均保存期限后返回。
+ * @note
+ * GNSS使用模块默认星座，不改持久化AGNSS；关闭失败仍由APP最终断电。HTTP失败直接结束而不发另一来源命令，调用方必须先断电恢复。
  */
 void location_poll(void);
 /** @brief 读取定位完成状态；只有OK才可使用position。 */
